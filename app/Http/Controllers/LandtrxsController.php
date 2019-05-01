@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Client;
+use App\Landtrx;
+use App\Location;
+use App\PaymentMode;
 
-class ClientsController extends Controller
+class LandtrxsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +16,9 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        //
-        $clients = Client::all();
+        $landtrxs = Landtrx::all();
 
-        return view('clients.index',compact('clients'));
+        return view('land.index',compact('landtrxs'));
     }
 
     /**
@@ -27,9 +28,9 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        $client = new Client();
-       return view('clients.create',compact('client'));
-
+        $locations = Location::all();
+        $paymentmodes = PaymentMode::all();
+        return view('land.create',compact('locations','paymentmodes'));
     }
 
     /**
@@ -40,11 +41,22 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        $client = Client::create($this->validateRequest());
+        //
+            $data = request()->validate([
+             'name'=>'required|string|max:50',
+             'idno'=> 'required|numeric|min:7',
+             'location'=>'required',
+             'size'=> 'required',
+             'plotno'=>'required',
+             'cost'=>'required|numeric',
+             'paymentmode'=>'required',
+             'amount'=>'required|numeric',
+             'narration'=>'required',
+             'reference'=>'required'
+        ]);
 
-        return redirect('/clients');
-
-
+        $housetrx = Landtrx::create($data);
+         return redirect('/landtrx');
     }
 
     /**
@@ -53,11 +65,9 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)//route model binding
+    public function show($id)
     {
-        //$client = Client::findorfail($id);
-        //dd($client);
-        return view('clients.show',compact('client'));
+        //
     }
 
     /**
@@ -66,9 +76,9 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $client)
+    public function edit($id)
     {
-        return view('clients.edit',compact('client'));
+        //
     }
 
     /**
@@ -78,13 +88,9 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Client $client)
+    public function update(Request $request, $id)
     {
-         
-         $client->update($this->validateRequest());
-
-        return redirect('clients/'.$client->id);
-
+        //
     }
 
     /**
@@ -93,20 +99,8 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    public function destroy($id)
     {
-        $client->delete();
-
-        return redirect('clients');
-    }
-
-    private  function validateRequest()
-    {
-        return request()->validate([
-             'name'=>'required|string|max:50',
-             'idno'=> 'required|numeric|min:7',
-             'mobile'=>'required|numeric|min:10'  
-                  ]);
-
+        //
     }
 }
