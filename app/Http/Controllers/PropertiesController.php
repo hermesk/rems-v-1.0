@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\Size;
 use App\Plotno;
-use App\PaymentMode;
 
 class PropertiesController extends Controller
 {
@@ -19,42 +18,14 @@ class PropertiesController extends Controller
     {
         return view('administrator.property.index');
     }
-    public function locationindex()
-    {
-        $locations = Location::all();
-        return view('administrator.property.location.index',compact('locations'));
-    }
-
-     public function paymentModeindex()
-    {
-        $paymentmodes = PaymentMode::all();
-        return view('administrator.property.paymentmode.index',compact('paymentmodes'));
-    }
-
-    public function Sizeindex()
-    {
-        $sizes = Size::all();
-        return view('administrator.property.size.index',compact('sizes'));
-    }
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function createlocation()
-    {
-        
-        return view('administrator.property.location.create');
-    }
+   
 
-    public function createsize()
-    {    
-        $locations = Location::all();
-        $size = new Size();
-        
-        
-        return view('administrator.property.size.create',compact('locations','size'));
-    }
 
     public function createplotno()
     {    
@@ -63,11 +34,7 @@ class PropertiesController extends Controller
         
         return view('administrator.property.plotno.create',compact('locations','sizes'));
     }
-    public function createPaymentMode()
-    {
-        
-        return view('administrator.property.paymentmode.create');
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -75,44 +42,8 @@ class PropertiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storelocation(Request $request)
-    {
-        
-        $data = request()->validate([
-            'name'=>'required'
-        ]);
-       
+    
 
-         $location = Location::create($data);
-           
-         return redirect('/property');
-    }
-
-    public function storePaymentMode(Request $request)
-    {
-        
-        $data = request()->validate([
-            'name'=>'required'
-        ]);
-       
-
-         $paymentmode = PaymentMode::create($data);
-           
-         return redirect('/property');
-    }
-
-    public function storesize(Request $request)
-     {
-        $data = request()->validate([
-            'name'=>'required',
-            'location_id'=>'required'
-        ]);
-       
-
-         $size = Size::create($data);
-           
-         return redirect('/property');
-     }
 
     public function storeplotno(Request $request)
      {
@@ -151,20 +82,10 @@ class PropertiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showlocation(Location $location)
-    {
-        //$location = Location::findorfail($id);
-    return view('administrator.property.location.show',compact('location'));
-    }
    
-    public function showPaymentMode(PaymentMode $paymentmode)
+    public function show()
     {
-    return view('administrator.property.paymentmode.show',compact('paymentmode'));
-    }
-
-    public function showSize(Size $size)
-    {
-    return view('administrator.property.size.show',compact('size'));
+       
     }
     /**
      * Show the form for editing the specified resource.
@@ -172,21 +93,10 @@ class PropertiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editlocation(Location $location)
-    {
-    return view('administrator.property.location.edit',compact('location'));
-    }
 
-    public function editPaymentMode(PaymentMode $paymentmode)
+   public function edit()
     {
-
-    return view('administrator.property.paymentmode.edit',compact('paymentmode'));
-    }
-
-    public function editSize(Size $size)
-    {
-          $locations = Location::all();
-    return view('administrator.property.size.edit',compact('size','locations'));
+       
     }
 
     /**
@@ -196,36 +106,11 @@ class PropertiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updatelocation(Location $location)
+   
+   public function update()
     {
-        $data = request()->validate([
-            'name'=>'required'
-        ]);
-        $location->update($data);
-
-        return redirect('/location/'.$location->id);
+       
     }
-
-    public function updatePaymentMode(PaymentMode $paymentmode)
-    {
-        $data = request()->validate([
-            'name'=>'required'
-        ]);
-        $paymentmode->update($data);
-
-        return redirect('/paymentmode/'.$location->id);
-    }
-
-    public function updateSize(Size $size)
-    {
-        $data = request()->validate([
-            'name'=>'required','location_id'=>'required'
-        ]);
-        $size->update($data);
-
-        return redirect('/size/'.$size->id);
-    }
-
 
     /**
      * Remove the specified resource from storage.
@@ -233,24 +118,11 @@ class PropertiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroylocation(Location $location)
+ 
+
+    public function destroySize()
     {
-        $location->delete();
-
-        return redirect('location');
-    }
-
-    public function destroyPaymentMode(PaymentMode $paymentmode)
-    {
-        $paymentmode->delete();
-
-        return redirect('payment-mode');
-    }
-    public function destroySize(Size $size)
-    {
-       $size->delete();
-
-       return redirect('/size');
+       
     }
 
 }

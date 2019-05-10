@@ -24,10 +24,10 @@
 	   <div class="row form-group col-md-4"> 	
 		<label for="size_id">Size<span class="text-danger">*</span></label>
 		<select name="size_id" id="size_id" class="form-control">
-			<option value="">Select Size</option>
+			{{-- <option value="">Select Size</option>
             @foreach($sizes as $size)
 			<option value="{{$size->id}}">{{$size->name}}</option>
-			@endforeach
+			@endforeach --}}
 		</select>
 		
 		<div>{{$errors->first('size_id')}}</div>
@@ -56,6 +56,33 @@
 		</form>	
 	</div>	
 </div>
+  <script type="text/javascript">
+    $('#location_id').change(function(){
+    var locationID = $(this).val();    
+    if(locationID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('get-sizes')}}?location_id="+locationID,
+           success:function(res){               
+            if(res){
+                $("#size_id").empty();
+                $("#size_id").append('<option>--Select Size--</option>');
+                $.each(res,function(key,value){
+                	
+                    $("#size_id").append('<option value="'+key+'">'+value+'</option>');
+                });
+           
+            }else{
+               $("#size_id").empty();
+            }
+           }
+        });
+    }else{
+        $("#size_id").empty();
+        //$("#plotno").empty();
+    }      
+   });
+   </script>
 @endsection
 
 

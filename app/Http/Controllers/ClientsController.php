@@ -41,9 +41,9 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         $client = Client::create($this->validateRequest());
-
-        return redirect('/clients');
-
+       
+       session()->flash('message',' Client Saved Successfully');
+    return redirect('/clients');
 
     }
 
@@ -82,8 +82,9 @@ class ClientsController extends Controller
     {
          
          $client->update($this->validateRequest());
-
+        session()->flash('message',' Client Updated Successfully');
         return redirect('clients/'.$client->id);
+
 
     }
 

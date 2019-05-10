@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLandtrxesTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CreateLandtrxesTable extends Migration
      */
     public function up()
     {
-        Schema::create('landtrxes', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('idno');
             $table->string('name');
+            $table->string('property');
             $table->string('location');
             $table->string('size');
             $table->string('plotno');
             $table->string('cost');
             $table->string('paymentmode');
+            $table->string('date');
             $table->string('amount');
             $table->string('reference');
             $table->string('narration');
@@ -37,6 +39,6 @@ class CreateLandtrxesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('landtrxes');
+        Schema::dropIfExists('transactions');
     }
 }

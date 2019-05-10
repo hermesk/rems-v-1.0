@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Landtrx;
 use App\Location;
-use App\PaymentMode;
 
-class LandtrxsController extends Controller
+class LocationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +14,8 @@ class LandtrxsController extends Controller
      */
     public function index()
     {
-        $landtrxs = Landtrx::all();
-
-        return view('land.index',compact('landtrxs'));
-    }
+          $locations = Location::all();
+        return view('administrator.property.location.index',compact('locations'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -28,9 +24,7 @@ class LandtrxsController extends Controller
      */
     public function create()
     {
-        $locations = Location::all();
-        $paymentmodes = PaymentMode::all();
-        return view('land.create',compact('locations','paymentmodes'));
+        return view('administrator.property.location.create');
     }
 
     /**
@@ -39,24 +33,16 @@ class LandtrxsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Location $location)
     {
-        //
-            $data = request()->validate([
-             'name'=>'required|string|max:50',
-             'idno'=> 'required|numeric|min:7',
-             'location'=>'required',
-             'size'=> 'required',
-             'plotno'=>'required',
-             'cost'=>'required|numeric',
-             'paymentmode'=>'required',
-             'amount'=>'required|numeric',
-             'narration'=>'required',
-             'reference'=>'required'
+        $data = request()->validate([
+            'name'=>'required'
         ]);
+       
 
-        $housetrx = Landtrx::create($data);
-         return redirect('/landtrx');
+         $location = Location::create($data);
+         session()->flash('message',' Location Saved Successfully');
+         return redirect('/location');
     }
 
     /**
@@ -65,9 +51,10 @@ class LandtrxsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Location $location)
     {
-        //
+      return view('administrator.property.location.show',compact('location'));
+
     }
 
     /**
@@ -76,9 +63,10 @@ class LandtrxsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Location $location)
     {
-        //
+      return view('administrator.property.location.edit',compact('location'));
+
     }
 
     /**
@@ -88,9 +76,15 @@ class LandtrxsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Location $location)
     {
-        //
+        $data = request()->validate([
+            'name'=>'required'
+        ]);
+        $location->update($data);
+      session()->flash('message',' Location Updated Successfully');
+
+        return redirect('/location/'.$location->id);
     }
 
     /**
@@ -99,8 +93,10 @@ class LandtrxsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Location $location)
     {
-        //
+        $location->delete();
+
+        return redirect('location');
     }
 }
