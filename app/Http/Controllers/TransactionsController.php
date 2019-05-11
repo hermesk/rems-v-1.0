@@ -154,7 +154,7 @@ class TransactionsController extends Controller
         public function getCost(Request $request)
         {
           
-            $cost = DB::table("plotnos")->distinct('cost')
+            $cost = DB::table("plotnos")
             ->where("size_id",$request->size_id)
             ->where("location_id",$request->location_id)
             ->pluck("cost","id");

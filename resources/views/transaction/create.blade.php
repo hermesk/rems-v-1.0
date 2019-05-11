@@ -168,14 +168,17 @@
             if(res){
                 $("#plotno").empty();
                 $("#plotno").append('<option>--Select Plot No--</option>');
+
                 $.each(res,function(key,value){
- 
-                        var plots = value;
-         for(var i = 0; i < plots.length; i++)
-          {
-           $('#plotno').append('<option value='+i+'>'+plots[i]+'</option>');
-          }
-          //$("#cost").append(cost);
+                    
+                    var plotnos = value;
+					var plots = plotnos.split(',');
+     
+            for(var i = 0; i < plots.length; i++)
+		          {
+		           $('#plotno').append('<option value='+plots[i]+'>'+plots[i]+'</option>');
+		          }
+
                 
                 });
 
