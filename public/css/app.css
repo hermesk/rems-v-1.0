@@ -10669,19 +10669,17 @@ a.text-dark:focus {
 
 .containers {
   background-color: #fff;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 100%;
   margin: auto;
   text-align: center;
 }
 
-div.forms {
+div.form {
   display: block;
   text-align: center;
 }
 
-forms {
+form {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
