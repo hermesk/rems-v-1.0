@@ -14,11 +14,22 @@ class PropertiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('administrator.property.index');
     }
     
+     public function plotsindex()
+    {    $plotnos = Plotno::all();
+         $locations =Location::all();
+         $size =Size::all();
+        return view('administrator.property.plotno.index',compact('plotnos','locations','size'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +56,7 @@ class PropertiesController extends Controller
     
 
 
-    public function storeplotno(Request $request)
+    public function store(Request $request)
      {
         $from_plotno = request('from_plotno');
         $to_plotno = request('to_plotno');
@@ -83,9 +94,9 @@ class PropertiesController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-    public function show()
+    public function show(Plotno $plotno)
     {
-       
+         return view('administrator.property.plotno.show',compact('plotno'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -94,9 +105,10 @@ class PropertiesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-   public function edit()
+   public function edit(Plotno $plotno)
     {
-       
+        return view('administrator.property.plotno.edit',compact('plotno'));
+ 
     }
 
     /**
@@ -107,9 +119,17 @@ class PropertiesController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-   public function update()
+   public function update(Plotno $plotno)
     {
        
+          $data = request()->validate([
+            'plotno'=>'required'
+        ]);
+          $plotno->update($data);
+
+          session()->flash('message',' Plot Numbers Updated Successfully');
+        return redirect('/plots/'.$plotno->id);
+
     }
 
     /**

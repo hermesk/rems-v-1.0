@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Add New Plot nos')
 @section('content')
 <div class="row">
@@ -24,10 +24,7 @@
 	   <div class="row form-group col-md-4"> 	
 		<label for="size_id">Size<span class="text-danger">*</span></label>
 		<select name="size_id" id="size_id" class="form-control">
-			{{-- <option value="">Select Size</option>
-            @foreach($sizes as $size)
-			<option value="{{$size->id}}">{{$size->name}}</option>
-			@endforeach --}}
+			
 		</select>
 		
 		<div>{{$errors->first('size_id')}}</div>
@@ -48,9 +45,9 @@
 		   <input  type="number" name="cost" class="form-control" placeholder="cost" value="{{old('cost')}}">
 		     <div>{{$errors->first('cost')}}</div>
 	      </div>
-	      <div class="box-footer">
-        <a href="/plotno/create" class="btn btn-secondary">Cancel</a>
-  	    <button type="submit" class="btn btn-primary " > Add </button>
+	     <div class="box-footer">
+        <cancle-button text="Cancel"  type="reset" ></cancle-button>
+        <my-button type="submit" text="Add"></my-button>
 
        </div>				
 		</form>	

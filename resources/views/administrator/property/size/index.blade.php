@@ -1,9 +1,9 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Property Size')
 
 @section('content')
 <h4>Property Size</h4>
-<h5><a class="nav-link" href="/size/create">Add new Property Size</a></h5>
+<h5><a class="nav-link" href="{{route('size.create')}}">Add new Property Size</a></h5>
 
 <table>
 	<thead>
@@ -17,9 +17,9 @@
 
   @foreach($sizes as $size)
  <tr>
- 	<td><a href="/size/{{$size->id}}">{{$size->name}}</a></td>
+ 	<td><a href="{{route('size.show',['size'=>$size])}}">{{$size->name}}</a></td>
  	<td>
- 	{{$size->location_id}}
+ 	{{$size->location->name}}
  	</td>
  
  </tr>

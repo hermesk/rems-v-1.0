@@ -16,13 +16,13 @@
 </head>
 <body>
 <div class="container">
-  @include('layouts.nav')
+ {{--  @include('layouts.nav')
   
   @if(session()->has('message'))
        <div class="alert alert-success">
         {{ session('message') }}
        </div>
-  @endif
+  @endif --}}
 
   @yield('content')
 </div>

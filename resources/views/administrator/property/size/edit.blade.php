@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Edit Details for'.$size->name)
 @section('content')
 <div class="row">
@@ -11,14 +11,12 @@
 <div class="row">
 
 <div class="col-12">
- <form action="/size/{{$size->id}}" method="POST">
+ <form action="{{route('size.update',['size'=>$size])}}" method="POST">
        @method('PATCH')
       @include('partials.SizeForm')
 
   	 <div class="box-footer">
-
-  	    <button type="submit" class="btn btn-primary " > Update  </button>
-
+       <my-button type="submit" text="Update"></my-button>
        </div>
 
   </form>

@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title',$location->name.'Location')
 @section('content')
 <div class="row">
@@ -8,7 +8,7 @@
 </div>
 <div class="row">
 	<div class="col-12">
-		<form action="/location/{{$location->id}}" method="POST">
+		<form action="{{route('location.update',['location'=>$location])}}" method="POST">
           @csrf
           @method('PATCH')
 
@@ -19,7 +19,7 @@
 	    </div>	
 
 	    <div class="box-footer">
-  	    <button type="submit" class="btn btn-primary " > Update</button>
+        <my-button type="submit" text="Update"></my-button>
        </div>				
 		</form>	
 	</div>	

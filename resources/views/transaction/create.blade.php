@@ -1,5 +1,6 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Record Transaction')
+<div>
 @section('content')
 <div class="row">
 	<div class="col-12">
@@ -124,15 +125,14 @@
 
 	</div>
  <div class="box-footer">
-        <a href="/transaction/create" class="btn btn-secondary">Cancel</a>
-  	    <button type="submit" class="btn btn-primary " > Add </button>
-
+        <cancle-button text="Cancel"  type="reset" ></cancle-button>
+        <my-button type="submit" text="Add"></my-button>
        </div>
 		</form>
 
 	</div>
 </div>
-
+</div>
   <script type="text/javascript">
     $('#location').change(function(){
     var locationID = $(this).val();    

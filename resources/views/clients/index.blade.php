@@ -1,9 +1,9 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Clients List')
 
 @section('content')
 <h4>Clients List</h4>
-<h3><a class="nav-link" href="/clients/create">Add new Client</a></h3>
+<h3><a class="nav-link" href="{{route('clients.create')}}">Add new Client</a></h3>
 
 <table>
 	<thead>
@@ -19,7 +19,7 @@
   @foreach($clients as $client)
  <tr>
  	<td>
- 	<a href="/clients/{{$client->id}}">{{$client->name}}</a>
+ 	<a href="{{route('clients.show',['client'=>$client])}}">{{$client->name}}</a>
  	</td>
  	<td>{{$client->idno}}</td>
  	<td>{{$client->mobile}}</td>

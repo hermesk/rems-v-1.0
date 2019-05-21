@@ -9,9 +9,16 @@ class Location extends Model
     protected $fillable = ['name'];
 
 
-    public function Landtrxs()
+    public function plotnos()
     {
-    	return $this->hasMany(Landtrxs::class);
+    	return $this->hasMany(Plotno::class);
 
     }
+
+    public function sizes()
+    {
+    	return $this->hasMany(Size::class);
+
+    }
+
 }

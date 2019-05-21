@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Add New Payment Mode')
 @section('content')
 <div class="row">
@@ -8,7 +8,7 @@
 </div>
 <div class="row">
 	<div class="col-12">
-		<form action="/payment-mode" method="POST">
+		<form action="{{route('paymentMode.store')}}" method="POST">
           @csrf
 
          <div class="row form-group col-md-4 ">  	
@@ -18,8 +18,8 @@
 	    </div>	
 
 	    <div class="box-footer">
-        <a href="/payment-mode/create" class="btn btn-secondary">Cancel</a>
-  	    <button type="submit" class="btn btn-primary " > Add </button>
+        <cancle-button text="Cancel"  type="reset" ></cancle-button>
+        <my-button type="submit" text="Add"></my-button>
 
        </div>				
 		</form>	

@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
 
 
 Route::Resource('clients','ClientsController');
@@ -32,6 +32,7 @@ Route::get('get-cost','TransactionsController@getCost');
 
 //property details
 Route::get('property','PropertiesController@index');
+
 //location
 Route::Resource('location','LocationsController');
 
@@ -42,12 +43,20 @@ Route::Resource('size','SizesController');
 
 
 //plotno
-Route::get('/plotno/create','PropertiesController@createplotno');
-Route::post('/plotno','PropertiesController@storeplotno');
+Route::get('plots','PropertiesController@plotsindex');//plots
+Route::get('/plots/create','PropertiesController@createplotno');
+Route::post('/plotno','PropertiesController@store');
+Route::get('plots/{plotno}','PropertiesController@show');
+Route::get('plots/{plotno}/edit','PropertiesController@edit');
+Route::patch('plots/{plotno}','PropertiesController@update');
 
 //dropdown dependents
 // Route::get('get-sizes','HousetrxsController@getSizes');
 // Route::get('get-plotno','HousetrxsController@getPlotnos');
 
 //payment mode
-Route::Resource('payment-mode','PaymentModesController');
+Route::Resource('paymentMode','PaymentModesController');
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');

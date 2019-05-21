@@ -12,6 +12,11 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -43,7 +48,7 @@ class ClientsController extends Controller
         $client = Client::create($this->validateRequest());
        
        session()->flash('message',' Client Saved Successfully');
-    return redirect('/clients');
+    return redirect()->route('clients.index');
 
     }
 
@@ -55,8 +60,6 @@ class ClientsController extends Controller
      */
     public function show(Client $client)//route model binding
     {
-        //$client = Client::findorfail($id);
-        //dd($client);
         return view('clients.show',compact('client'));
     }
 
@@ -83,7 +86,7 @@ class ClientsController extends Controller
          
          $client->update($this->validateRequest());
         session()->flash('message',' Client Updated Successfully');
-        return redirect('clients/'.$client->id);
+        return redirect()->route('clients.show',['client'=>$client]);
 
 
     }
@@ -98,7 +101,7 @@ class ClientsController extends Controller
     {
         $client->delete();
 
-        return redirect('clients');
+        return redirect()->route('clients.index');
     }
 
     private  function validateRequest()

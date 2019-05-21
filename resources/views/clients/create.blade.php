@@ -1,30 +1,30 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Add New Client')
-@section('content')
+
+<div class="container">
+  @section('content')
 <div class="row">
-	<div class="col-12">
-	<h1>Add New Client</h1>	
-	</div>
+  <div class="col-12">
+  <h1>Add New Client</h1> 
+  </div>
 </div>
 
 
-<div class="row">
 
-<div class="col-12">
- <form action="/clients" method="POST">
+<div class="form">
+ <form action="{{route('clients.store')}}" method="POST">
       @include('partials.client_form')
 
-  	 <div class="box-footer">
-        <a href="/clients/create" class="btn btn-secondary">Cancel</a>
-  	    <button type="submit" class="btn btn-primary " > Add </button>
+     <div class="box-footer">
+        <cancle-button text="Cancel"  type="reset" ></cancle-button>
+       <my-button type="submit" text="Add"></my-button>
 
+  
        </div>
 
   </form>
 
-	</div>
-</div>
-
- 
+  </div>
 
 @endsection
+</div>

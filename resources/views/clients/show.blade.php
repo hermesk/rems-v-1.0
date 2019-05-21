@@ -1,10 +1,10 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title',$client->name. ' Details')
 @section('content')
 <div class="row">
 	<div class="col-12">
 	<h5>{{$client->name}} Details</h5>	
-	<p><a href="/clients/{{$client->id}}/edit">Edit</a></p>
+	<p><a href="{{route('clients.edit',['client'=>$client])}}">Edit</a></p>
 	</div>
 </div>
 
@@ -17,7 +17,7 @@
 	<p><strong>Mobile:</strong>{{$client->mobile}}</p>
 
 </div>
-<form action="/clients/{{$client->id}}" method="POST">
+<form action="{{route('clients.destroy',['client'=>$client])}}" method="POST">
 	@csrf
 	@method('DELETE')
    <button type="submit" class="btn btn-danger">Delete</button>

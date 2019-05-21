@@ -14,8 +14,8 @@ class PaymentModesController extends Controller
      */
     public function index()
     {
-          $paymentmodes = PaymentMode::all();
-        return view('administrator.property.paymentmode.index',compact('paymentmodes'));
+          $paymentModes = PaymentMode::all();
+        return view('administrator.property.paymentmode.index',compact('paymentModes'));
     }
 
     /**
@@ -45,7 +45,7 @@ class PaymentModesController extends Controller
 
          $paymentmode = PaymentMode::create($data);
          session()->flash('message',' Payment Mode created Successfully'); 
-         return redirect('payment-mode');
+         return redirect()->route('paymentMode.index');
     }
 
     /**
@@ -54,9 +54,9 @@ class PaymentModesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(PaymentMode $paymentmode)
+    public function show(PaymentMode $paymentMode)
     {
-            return view('administrator.property.paymentmode.show',compact('paymentmode'));
+            return view('administrator.property.paymentmode.show',compact('paymentMode'));
     }
 
     /**
@@ -65,9 +65,9 @@ class PaymentModesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(PaymentMode $paymentmode)
+    public function edit(PaymentMode $paymentMode)
     {
-        return view('administrator.property.paymentmode.edit',compact('paymentmode'));
+        return view('administrator.property.paymentmode.edit',compact('paymentMode'));
     }
 
     /**
@@ -77,14 +77,14 @@ class PaymentModesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PaymentMode $paymentmode)
+    public function update(PaymentMode $paymentMode)
     {
             $data = request()->validate([
             'name'=>'required'
         ]);
-        $paymentmode->update($data);
+        $paymentMode->update($data);
              session()->flash('message',' Payment Mode Updated Successfully');
-        return redirect('/paymentmode/'.$location->id);
+        return redirect()->route('paymentMode.show',['paymentMode'=>$paymentMode]);
     }
 
     /**
@@ -93,10 +93,10 @@ class PaymentModesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PaymentMode $paymentmode)
+    public function destroy(PaymentMode $paymentMode)
     {
-                $paymentmode->delete();
+                $paymentMode->delete();
 
-        return redirect('payment-mode');
+        return redirect()->route('paymentMode.index');
     }
 }

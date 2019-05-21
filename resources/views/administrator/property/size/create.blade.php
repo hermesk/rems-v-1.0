@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Add New Propert Sizes')
 @section('content')
 <div class="row">
@@ -8,11 +8,14 @@
 </div>
 <div class="row">
 	<div class="col-12">
-	<form action="/size" method="POST">
+	<form action="{{route('size.store')}}" method="POST">
 		@include('partials.SizeForm')	
 
-    <a href="/size/create" class="btn btn-secondary">Cancel</a>
-  	<button type="submit" class="btn btn-primary " > Add </button>	
+    <div class="box-footer">
+        <cancle-button text="Cancel"  type="reset" ></cancle-button>
+        <my-button type="submit" text="Add"></my-button>
+
+       </div>
 	</form>	
 	</div>	
 </div>

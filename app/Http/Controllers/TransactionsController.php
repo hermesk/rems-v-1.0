@@ -66,7 +66,7 @@ class TransactionsController extends Controller
               $size = DB::table('sizes')->where('id', $size_id)->value('name');
              //get payment mode name
               $pmode_id = request('paymentmode');
-              $pmode = DB::table('payment_modes')->where('id', $pmode_id )->value('name');
+              $pmode = DB::table('paymentModes')->where('id', $pmode_id )->value('name');
 
 
                $receipt = array(
