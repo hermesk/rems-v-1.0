@@ -12,10 +12,10 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function  __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function  __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -45,6 +45,7 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create',Client::class);
         $client = Client::create($this->validateRequest());
        
        session()->flash('message',' Client Saved Successfully');

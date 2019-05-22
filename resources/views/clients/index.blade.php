@@ -7,7 +7,9 @@
         <div class="col-md-8">
             <div class="card">
              <div class="card-header">Clients List
+             @can('create', App\Client::class)
              <h6><a class="nav-link" href="{{route('clients.create')}}">+Add</a></h6>
+             @endcan
              </div>
              <table>
 				<thead>
