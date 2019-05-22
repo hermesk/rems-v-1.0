@@ -12,15 +12,15 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function  __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function  __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index()
     {
         //
-        $clients = Client::all();
+        $clients = Client::paginate(15);
 
         return view('clients.index',compact('clients'));
     }

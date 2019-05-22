@@ -32,6 +32,11 @@
 			    @endforeach
 			    </tbody>
             </table>
+            <div class="row">
+            	<div class="col-12 d-flex justify-content-center pt-4">
+            		{{$clients->links()}}
+            	</div>
+            </div>
             </div>
         </div>
     </div>

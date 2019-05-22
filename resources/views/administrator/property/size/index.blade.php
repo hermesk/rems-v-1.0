@@ -12,7 +12,7 @@
 					<thead>
 					<tr>
 						<th width="20%">Size</th>
-				        <th width="20%">Location id</th>
+				        <th width="20%">Location </th>
 				    
 				  </tr>
 				</thead>

@@ -14,10 +14,10 @@ class PropertiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index()
     {
@@ -25,10 +25,10 @@ class PropertiesController extends Controller
     }
     
      public function plotsindex()
-    {    $plotnos = Plotno::all();
-         $locations =Location::all();
-         $size =Size::all();
-        return view('administrator.property.plotno.index',compact('plotnos','locations','size'));
+    {  
+        $plotnos = Plotno::with('location','size')->get(); //eager loading
+         
+        return view('administrator.property.plotno.index',compact('plotnos'));
     }
     /**
      * Show the form for creating a new resource.

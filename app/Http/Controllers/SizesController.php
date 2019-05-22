@@ -15,7 +15,7 @@ class SizesController extends Controller
      */
     public function index()
     {
-        $sizes = Size::all();
+        $sizes = Size::with('location')->get();
         return view('administrator.property.size.index',compact('sizes'));
     }
 

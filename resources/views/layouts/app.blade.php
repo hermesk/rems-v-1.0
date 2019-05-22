@@ -32,13 +32,14 @@
     <div id="app">
         @include('layouts.nav')
 
-        @if(session()->has('message'))
-       <div class="alert alert-success">
-        {{ session('message') }}
-       </div>
-        @endif
+        
         <main class="py-4">
             <div class="container">
+              @if(session()->has('message'))
+               <div class="alert alert-success">
+                {{ session('message') }}
+               </div>
+                @endif
                  @yield('content')   
             </div>
         
