@@ -29,8 +29,8 @@
                 </td>
             </tr> --}}                    
                 <h4>Payment Receipt</h4>
-                <tr><th>Receipt No:</th><td>{{$receipt['rctno']}}</td></tr>
-                <tr><th>Transaction Date:</th><td>{{ date('Y-m-d H:i:s') }}</td></tr>
+{{--                 <tr><th>Receipt No:</th><td>{{$receipt['rctno']}}</td></tr>
+ --}}                <tr><th>Transaction Date:</th><td>{{ date('Y-m-d H:i:s') }}</td></tr>
                 <tr><th>Name:</th><td>{{$receipt['name']}}</td></tr>
                 <tr><th>Mobile:</th><td>{{$receipt['mobile']}}</td></tr>
                 <tr><th>Amount Paid:</th><td>{{$receipt['amount']}}</td></tr>

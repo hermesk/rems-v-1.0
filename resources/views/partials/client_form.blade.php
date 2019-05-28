@@ -18,3 +18,8 @@
 	    	<input type="number" name="mobile" class="form-control" placeholder="mobile number" value="{{old('mobile') ?? $client->mobile}}" >
 	    	     <div>{{$errors->first('mobile')}}</div>
 	    </div>
+	     <div class="row form-group col-md-6">
+	    	<label for="kra_pin">KRA Pin No.</label>
+	    	<input type="kra_pin" name="kra_pin" class="form-control" placeholder="KRA Pin" value="{{old('kra_pin') ?? $client->kra_pin}}" >
+	    	     <div>{{$errors->first('kra_pin')}}</div>
+	    </div>

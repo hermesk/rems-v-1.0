@@ -23,6 +23,9 @@ class CreatePaymentsReceiptsTable extends Migration
             $table->string('paymentType');
             $table->string('narration');
             $table->string('amount_in_words');
+            $table->string('created_by')->nullable();
+            $table->string('deleted_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

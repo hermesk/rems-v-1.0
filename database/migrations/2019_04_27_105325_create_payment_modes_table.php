@@ -13,9 +13,11 @@ class CreatePaymentModesTable extends Migration
      */
     public function up()
     {
-        Schema::create('paymentModes', function (Blueprint $table) {
+        Schema::create('payment_modes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('created_by')->nullable();
+            $table->string('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ class CreatePaymentModesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paymentModes');
+        Schema::dropIfExists('payment_modes');
     }
 }

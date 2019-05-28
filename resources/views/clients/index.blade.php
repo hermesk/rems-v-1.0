@@ -16,7 +16,8 @@
 				<tr>
 			    <th width="20%">Name</th>
 			    <th width="20%">ID No</th>
-			    <th width="10%">Mobile No</th>
+			    <th width="20%">Mobile No</th>
+			    <th width="20%">KRA Pin No</th>
 
 			  </tr>
 			</thead>
@@ -29,6 +30,7 @@
 			 	</td>
 			 	<td>{{$client->idno}}</td>
 			 	<td>{{$client->mobile}}</td>
+			 	<td>{{$client->kra_pin}}</td>
 
 			 </tr>
 			    @endforeach

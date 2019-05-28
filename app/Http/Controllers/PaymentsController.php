@@ -60,14 +60,14 @@ class PaymentsController extends Controller
           $pmode = DB::table('payment_modes')->where('id', $pmode_id )->value('name');
 
           //generate receipt no
-          $rctno = new payments_receipt();
-          $lastrctnoID = $rctno->orderBy('id', DESC)->pluck('id')->first();
-          $newrctnoID =  $lastrctnoID + 1;
+          // $rctno = payments_receipt::latest()->first();
+          // $lastrctnoID = $rctno->orderBy('id', DESC)->pluck('id')->first();
+          // $newrctnoID =  $lastrctnoID + 1;
 
 
 
        $receipt = array(
-            'rctno'=>$newrctnoID,
+            //'rctno'=>$newrctnoID,
             'name'  => request('name'),
             'mobile'=>request('mobile'),
             'amount'=>request('amount'),

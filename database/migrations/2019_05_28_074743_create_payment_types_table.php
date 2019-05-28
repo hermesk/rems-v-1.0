@@ -17,6 +17,9 @@ class CreatePaymentTypesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('type');
+            $table->string('created_by')->nullable();
+            $table->string('deleted_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

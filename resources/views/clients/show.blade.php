@@ -15,6 +15,7 @@
 					<p><strong>Name:</strong>{{$client->name}}</p>
 					<p><strong>Id No:</strong>{{$client->idno}}</p>
 					<p><strong>Mobile:</strong>{{$client->mobile}}</p>
+					<p><strong>KRA Pin No:</strong>{{$client->kra_pin}}</p>
 
 				</div>
 				<form action="{{route('clients.destroy',['client'=>$client])}}" method="POST">

@@ -18,6 +18,9 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->integer('idno');
             $table->string('mobile');
+            $table->string('kra_pin')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -16,6 +16,8 @@ class CreateLocationSizePlotnosTables extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('created_by')->nullable();
+            $table->string('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -23,7 +25,9 @@ class CreateLocationSizePlotnosTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('location_id'); 
-            $table->softDeletes();           
+            $table->string('created_by')->nullable();
+            $table->string('deleted_by')->nullable();
+            $table->softDeletes();          
             $table->timestamps();
         });
         Schema::create('plotnos', function (Blueprint $table) {
@@ -32,6 +36,8 @@ class CreateLocationSizePlotnosTables extends Migration
             $table->integer('size_id'); 
             $table->string('plotno');
             $table->string('cost'); 
+            $table->string('created_by')->nullable();
+            $table->string('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

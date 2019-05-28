@@ -27,6 +27,8 @@ class CreateTransactionsTable extends Migration
             $table->string('amount');
             $table->string('reference');
             $table->string('narration');
+            $table->string('created_by')->nullable();
+            $table->string('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
