@@ -17,5 +17,4 @@
 	    	<label for="mobile">Mobile No.<span class="text-danger">*</span></label>
 	    	<input type="number" name="mobile" class="form-control" placeholder="mobile number" value="{{old('mobile') ?? $client->mobile}}" >
 	    	     <div>{{$errors->first('mobile')}}</div>
-
 	    </div>

@@ -24,6 +24,15 @@ Route::Resource('clients','ClientsController');
 Route::get('transaction/create','TransactionsController@create');
 Route::post('transaction','TransactionsController@store');
 
+//payment types
+Route::Resource('paymentType','PaymentTypesController');
+
+
+//payments
+Route::get('payments','PaymentsController@index')->name('payments.index');
+Route::get('payments/create','PaymentsController@create')->name('payments.create');
+Route::post('payments','PaymentsController@store')->name('payments.store');
+
 //dropdown depenents
 Route::get('get-sizes','TransactionsController@getSizes');
 Route::get('get-plotno','TransactionsController@getPlotnos');
