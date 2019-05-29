@@ -8,26 +8,26 @@
 
                 <div class="card-body">
             <table> 
-            {{--   <tr>
+              <tr>
                 <td align="center" >
                 <font size="0.5">HEAD OFFICE<br/>
-                YALA TOWERS,6TH FLOOR<br/>
-                BIASHARA STREET, NAIROBI<br/>
-                0800 721 251<br/> <font>
+                NJENGI HOUSE,5TH FLOOR<br/>
+                TOM MBOYA STREET, NAIROBI<br/>
+                0746 517010<br/> <font>
                 </td>
                 <td>
-                <img src="images/gakuyo.png"  />
-                 <font size="0.5"><P><b>WHERE TRUST MEETS YOUR VISION</b></P>
+                {{-- <img src="images/gakuyo.png"  /> --}}
+                 <font size="0.5"><P><b>YOUR SOLUTION IN LAND & HOME CONSULTANCY</b></P>
                  </font>
                 </td>
-                <td align="center">
-                <font size="0.5">THIKA OFFICE<br/>
-                TUSKYS CHANIA,3rd FLOOR<br/>
-                GATITU JUNCTION.<br/>
-                0800 721 250<br/>
-                <font>
+                <td align="center" >
+                <font size="0.5">HEAD OFFICE<br/>
+                NJENGI HOUSE,5TH FLOOR<br/>
+                TOM MBOYA STREET, NAIROBI<br/>
+                0746 517010<br/> <font>
                 </td>
-            </tr> --}}                    
+                <td>
+            </tr>                    
             <tr><th>Receipt No:</th><td>{{$receipt['rctno']}}</td></tr>
         
             <tr><th>Transaction Date:</th><td>{{$receipt['date']}}</td>
