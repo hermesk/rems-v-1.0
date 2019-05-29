@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Size;
-use App\Location;
 
 class SizesController extends Controller
 {
@@ -20,7 +19,7 @@ class SizesController extends Controller
     
     public function index()
     {
-        $sizes = Size::with('location')->get();
+        $sizes = Size::all();
         return view('administrator.property.size.index',compact('sizes'));
     }
 
@@ -31,11 +30,8 @@ class SizesController extends Controller
      */
     public function create()
     {
-        $locations = Location::all();
         $size = new Size();
-        
-        
-        return view('administrator.property.size.create',compact('locations','size'));
+    return view('administrator.property.size.create',compact('size'));
     }
 
     /**
@@ -47,9 +43,8 @@ class SizesController extends Controller
     public function store(Size $size)
     {
         $data = request()->validate([
-            'name'=>'required',
-            'location_id'=>'required'
-        ]);
+            'name'=>'required'
+                    ]);
        
 
          $size = Size::create($data);
@@ -78,8 +73,7 @@ class SizesController extends Controller
      */
     public function edit(Size $size)
     {
-       $locations = Location::all();
-       return view('administrator.property.size.edit',compact('size','locations'));
+       return view('administrator.property.size.edit',compact('size'));
     }
 
     /**
@@ -92,7 +86,7 @@ class SizesController extends Controller
     public function update(Size $size)
     {
         $data = request()->validate([
-            'name'=>'required','location_id'=>'required'
+            'name'=>'required'
         ]);
         $size->update($data);
                 session()->flash('message',' Size Updated Successfully');

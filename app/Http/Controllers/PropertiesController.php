@@ -74,17 +74,22 @@ class PropertiesController extends Controller
           //dd(json_encode($plotnos));
          //$property = Property::create($data);
 
-         $plotno = new Plotno();
+         //dd(count($plotnos));
 
-         $plotno->location_id = request('location_id');
-         $plotno->size_id = request('size_id');
-         $plotno->plotno =implode($plotnos, ', ');
-         $plotno->cost = request('cost');
+         for ($i=0; $i <count($plotnos); $i++) { 
 
-         $plotno->save();
-       
+             $plotno = new Plotno();
+
+             $plotno->location_id = request('location_id');
+             $plotno->size_id = request('size_id');
+             $plotno->plotno = $plotnos[$i];
+             $plotno->cost = request('cost');
+
+             $plotno->save();
+            
            
-         return redirect('/property');
+         }
+        return redirect('/property');
      }
 
     /**

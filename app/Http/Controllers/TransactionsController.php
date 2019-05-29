@@ -142,7 +142,7 @@ class TransactionsController extends Controller
       public function getSizes(Request $request)
         {
 
-             $sizes = DB::table("sizes")
+             $sizes = DB::table("plotnos")
             ->where("location_id",$request->location_id)
             ->pluck("name","id");
             

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 @section('title','Record Transaction')
 @section('content')
 <div class="container">
@@ -14,7 +14,7 @@
                   <div class="col-md-4 form-group">
                     
                      <label for="idno">ID No.<span class="text-danger">*</span></label>
-                        <input type="number" name="idno" class="form-control" placeholder="ID number" value="{{old('idno')}}" >
+                        <input type="text" name="idno" class="form-control" placeholder="ID number" value="{{old('idno')}}" >
                          <div>{{$errors->first('idno')}}</div>
                    
                  </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 @section('title','Add New Plot nos')
 @section('content')
 <div class="container">
@@ -24,7 +24,10 @@
 				   <div class="row form-group col-md-8"> 	
 					<label for="size_id">Size<span class="text-danger">*</span></label>
 					<select name="size_id" id="size_id" class="form-control">
-						
+						<option value="">Select Size</option>
+						@foreach($sizes as $size)
+						<option value="{{$size->id}}">{{$size->name}}</option>
+						@endforeach
 					</select>
 					
 					<div>{{$errors->first('size_id')}}</div>
@@ -48,6 +51,7 @@
 				     <div class="box-footer">
 			        <cancle-button text="Cancel"  type="reset" ></cancle-button>
 			        <my-button type="submit" text="Add"></my-button>
+			        <button type="submit" class="btn btn-primary">Add</button>
 
 			       </div>				
 					</form>	
@@ -56,7 +60,7 @@
         </div>
     </div>
 </div>
-  <script type="text/javascript">
+ {{--  <script type="text/javascript">
     $('#location_id').change(function(){
     var locationID = $(this).val();    
     if(locationID){
@@ -82,7 +86,7 @@
         //$("#plotno").empty();
     }      
    });
-   </script>
+   </script> --}}
 @endsection
 
 
