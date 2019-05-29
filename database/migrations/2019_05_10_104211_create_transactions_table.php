@@ -15,20 +15,20 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('client_idno')->unsigned();
-            $table->integer('payment_type_id')->unsigned();
+            $table->bigInteger('client_id')->unsigned();
+            $table->bigInteger('payment_type_id')->unsigned();
             $table->integer('location_id')->unsigned();
             $table->integer('size_id')->unsigned();
+            $table->bigInteger('paymentmode_id')->unsigned();
             $table->string('plotno');
-            $table->string('cost');
-            $table->integer('paymentmode_id')->unsigned();
+            $table->string('cost');            
             $table->string('date');
             $table->string('amount');
             $table->string('reference');
             $table->string('narration');
             $table->string('created_by')->nullable();
             $table->string('deleted_by')->nullable();
-            $table->foreign('client_idno')->references('idno')
+            $table->foreign('client_id')->references('id')
             ->on('clients');
             $table->foreign('size_id')->references('id')
             ->on('sizes');

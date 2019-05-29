@@ -28,7 +28,7 @@
                 </div>
 
               <div class="col-md-4 form-group">   
-                    <label for="ptype">Being Payment for<span class="text-danger">*</span></label>
+                    <label for="paymentType">Being Payment for<span class="text-danger">*</span></label>
                     <select name="paymentType" id="paymentType" class="form-control">
                         <option value="">--- Select Payment Type ---</option>
                                 @foreach ($paymentTypes as $paymentType)
@@ -79,8 +79,8 @@
 
                 <div class="row">       
                 <div class="col-md-4 form-group">   
-                    <label for="name">Cost<span class="text-danger">*</span></label>
-                    <input  type="text" name="cost" id="cost" class="form-control" placeholder="Cost" value="{{old('cost')}}" disabled >
+                    <label for="cost">Cost<span class="text-danger">*</span></label>
+                    <input  type="text" name="cost" id="cost" class="form-control" placeholder="Cost" value="{{old('cost')}}" readonly >
                     <div>{{$errors->first('cost')}}</div>
                   
                 </div>

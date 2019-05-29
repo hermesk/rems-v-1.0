@@ -9,7 +9,7 @@
 
 	    <div class="row form-group col-md-6">
 	    	<label for="idno">ID No.<span class="text-danger">*</span></label>
-	    	<input type="number" name="idno" class="form-control" placeholder="ID number" value="{{old('idno') ?? $client->idno}}" >
+	    	<input type="text" name="idno" class="form-control" placeholder="ID number" value="{{old('idno') ?? $client->idno}}" >
 	    	 <div>{{$errors->first('idno')}}</div>
 	    </div>
 	        

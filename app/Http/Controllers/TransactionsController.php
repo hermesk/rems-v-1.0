@@ -49,10 +49,11 @@ class TransactionsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = request()->validate([
+
+        $validate_data = $request->validate([
              'name'=>'required|string|max:50',
              'idno'=> 'required|numeric|min:7',
-             'property'=>'required',
+             'paymentType'=>'required',
              'location'=>'required',
              'size'=> 'required',
              'plotno'=>'required',
@@ -63,6 +64,7 @@ class TransactionsController extends Controller
              'narration'=>'required',
              'reference'=>'required'
         ]);
+
              //convert amount to words
             $converter = new Converter("Kenya Shillings", "Cents");
             $amount = $converter->convert(request('amount'));
@@ -75,12 +77,49 @@ class TransactionsController extends Controller
               $size = DB::table('sizes')->where('id', $size_id)->value('name');
              //get payment mode name
               $pmode_id = request('paymentmode');
-              $pmode = DB::table('paymentModes')->where('id', $pmode_id )->value('name');
+              $pmode = DB::table('payment_modes')->where('id', $pmode_id )->value('name');
+               //get payment type name
+              $payment_type_id = request('paymentType');
+              $payment_type = DB::table('payment_types')->where('id', $payment_type_id)->value('name');
+              //get client_id
+              $client_idno = request('idno');
+              $client_id = DB::table('clients')
+                           ->where('idno',$client_idno)
+                           ->value('id');
 
 
+           //insert in trx table
+             $trx = new Transaction();
+
+             $trx->client_id = $client_id;
+             $trx->payment_type_id = request('paymentType');
+             $trx->location_id = request('location');
+             $trx->size_id = request('size');
+             $trx->paymentmode_id = request('paymentmode');
+             $trx->plotno = request('plotno');
+             $trx->cost = request('cost');
+             $trx->date = request('date');
+             $trx->amount = request('amount');
+             $trx->reference = request('reference');
+             $trx->narration = request('narration');
+
+             $trx->save();
+
+             //update plot numbers
+             $plotno = request('plotno');
+
+             $update_plotno = DB::table('plotnos')
+                                ->where('location_id', $location_id)
+                                ->where('size_id', $size_id)
+                                ->where('plotno', $plotno)
+                                ->update(['status' => 1,
+                                          'client_id'=>$client_id
+                                  ]);
+
+                                  //receipt details
                $receipt = array(
                 'name'  => request('name'),
-                'property'=>request('property'),
+                'ptype'=>$payment_type,
                 'location'=> $location,
                 'size' => $size,
                 'plotno'=>request('plotno'),
@@ -92,9 +131,7 @@ class TransactionsController extends Controller
                 'amountinWords' => $amount
 
             );
-
-           $trx = Transaction::create($data);
-           return view('Template.receipt',compact('receipt'));
+            return view('Template.transaction_receipt',compact('receipt'));
 
     }
 
@@ -149,6 +186,7 @@ class TransactionsController extends Controller
             $plotnos = DB::table("plotnos")
             ->where("size_id",$request->size_id)
             ->where("location_id",$request->location_id)
+            ->whereNull('status')
             ->pluck("plotno","id");
 
             return response()->json($plotnos);

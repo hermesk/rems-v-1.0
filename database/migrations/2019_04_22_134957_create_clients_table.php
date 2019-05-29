@@ -16,7 +16,7 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('idno');
+            $table->string('idno')->unique();
             $table->string('mobile');
             $table->string('kra_pin')->nullable();
             $table->string('created_by')->nullable();
