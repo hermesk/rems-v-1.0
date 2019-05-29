@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Add New Plot nos')
 @section('content')
 <div class="container">
@@ -51,8 +51,6 @@
 				     <div class="box-footer">
 			        <cancle-button text="Cancel"  type="reset" ></cancle-button>
 			        <my-button type="submit" text="Add"></my-button>
-			        <button type="submit" class="btn btn-primary">Add</button>
-
 			       </div>				
 					</form>	
 	          </div>
@@ -60,33 +58,6 @@
         </div>
     </div>
 </div>
- {{--  <script type="text/javascript">
-    $('#location_id').change(function(){
-    var locationID = $(this).val();    
-    if(locationID){
-        $.ajax({
-           type:"GET",
-           url:"{{url('get-sizes')}}?location_id="+locationID,
-           success:function(res){               
-            if(res){
-                $("#size_id").empty();
-                $("#size_id").append('<option>--Select Size--</option>');
-                $.each(res,function(key,value){
-                	
-                    $("#size_id").append('<option value="'+key+'">'+value+'</option>');
-                });
-           
-            }else{
-               $("#size_id").empty();
-            }
-           }
-        });
-    }else{
-        $("#size_id").empty();
-        //$("#plotno").empty();
-    }      
-   });
-   </script> --}}
 @endsection
 
 

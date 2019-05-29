@@ -35,7 +35,8 @@ class TransactionsController extends Controller
     {
         $paymentmodes = PaymentMode::all();
         $locations = DB::table('locations')->pluck("name","id");
-        return view('transaction.create',compact('locations','paymentmodes'));
+        $sizes = DB::table('sizes')->pluck("name","id");
+        return view('transaction.create',compact('locations','paymentmodes','sizes'));
     }
 
     /**
@@ -90,7 +91,7 @@ class TransactionsController extends Controller
 
             );
 
-         //$trx = Transaction::create($data);
+           $trx = Transaction::create($data);
            return view('Template.receipt',compact('receipt'));
 
     }
@@ -139,20 +140,13 @@ class TransactionsController extends Controller
     {
         //
     }
-      public function getSizes(Request $request)
-        {
-
-             $sizes = DB::table("plotnos")
-            ->where("location_id",$request->location_id)
-            ->pluck("name","id");
-            
-            return response()->json($sizes);
-        }
+      
 
      public function getPlotnos(Request $request)
         {
             $plotnos = DB::table("plotnos")
             ->where("size_id",$request->size_id)
+            ->where("location_id",$request->location_id)
             ->pluck("plotno","id");
 
             return response()->json($plotnos);
@@ -161,10 +155,11 @@ class TransactionsController extends Controller
         {
           
             $cost = DB::table("plotnos")
+            ->where("plotno",$request->plotno)
             ->where("size_id",$request->size_id)
             ->where("location_id",$request->location_id)
-            ->pluck("cost","id");
+            ->pluck("cost");
 
-            return response()->json($cost);
+            return json_encode($cost);
         }
 }

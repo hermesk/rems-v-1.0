@@ -1,5 +1,6 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Record Transaction')
+ <script src="http://www.codermen.com/js/jquery.js"></script>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -52,12 +53,15 @@
                  </div>
 
                 <div class="col-md-4 form-group">   
-                <label for="size">Select Size<span class="text-danger">*</span></label>
-                    <select name="size" id="size" class="form-control">
-
+                <label for="size">Size<span class="text-danger">*</span></label>
+                  <select name="size" id="size" class="form-control">
+                        <option value="">Select Size</option>
+                       @foreach ($sizes as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
                     </select>
                     
-                    <div>{{$errors->first('size_id')}}</div>
+                    <div>{{$errors->first('size')}}</div>
                    
                 </div>
                 <div class="col-md-4 form-group">   
@@ -73,16 +77,12 @@
                  </div>
 
                 <div class="row">       
-                 <div class="col-md-4 form-group">
-                 
-                        <label for="cost">Cost.<span class="text-danger">*</span></label>
-                        {{-- <input type="number" name="cost" class="form-control" placeholder="Cost" value="{{old('cost')}}" > --}}
-                        <select name="cost" id="cost" class="form-control">
-                    
-                    </select>
-                         <div>{{$errors->first('cost')}}</div>
-                    
-                 </div>
+                <div class="col-md-4 form-group">   
+                    <label for="name">Cost<span class="text-danger">*</span></label>
+                    <input  type="text" name="cost" id="cost" class="form-control" placeholder="Cost" value="{{old('cost')}}" disabled >
+                    <div>{{$errors->first('cost')}}</div>
+                  
+                </div>
 
                    <div class="form-group col-md-4">
                     <label for="paymentmode">Payment Mode<span class="text-danger">*</span></label>
@@ -125,6 +125,7 @@
              <div class="box-footer">
                     <cancle-button text="Cancel"  type="reset" ></cancle-button>
                     <my-button type="submit" text="Add"></my-button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                    </div>
                     </form>
 
@@ -137,52 +138,24 @@
 
 
   <script type="text/javascript">
-    $('#location').change(function(){
-    var locationID = $(this).val();    
-    if(locationID){
-        $.ajax({
-           type:"GET",
-           url:"{{url('get-sizes')}}?location_id="+locationID,
-           success:function(res){               
-            if(res){
-                $("#size").empty();
-                $("#size").append('<option>--Select Size--</option>');
-                $.each(res,function(key,value){
-                    $("#size").append('<option value="'+key+'">'+value+'</option>');
-                });
-           
-            }else{
-               $("#size").empty();
-            }
-           }
-        });
-    }else{
-        $("#size").empty();
-        $("#plotno").empty();
-    }      
-   });
+
     $('#size').on('change',function(){
-    var sizeID = $(this).val();    
+    var sizeID = $(this).val();  
+    var locationID = $('#location').val();    
     if(sizeID){
+        alert(locationID);
         $.ajax({
            type:"GET",
-           url:"{{url('get-plotno')}}?size_id="+sizeID,
+           url:"{{url('get-plotno')}}",
+           data: {"size_id": sizeID,"location_id": locationID},
            success:function(res){               
             if(res){
                 $("#plotno").empty();
                 $("#plotno").append('<option>--Select Plot No--</option>');
 
                 $.each(res,function(key,value){
-                    
-                    var plotnos = value;
-					var plots = plotnos.split(',');
-     
-            for(var i = 0; i < plots.length; i++)
-		          {
-		           $('#plotno').append('<option value='+plots[i]+'>'+plots[i]+'</option>');
-		          }
-
-                
+                    	          
+		      $('#plotno').append('<option value="'+key+'">'+value+'</option>');	                          
                 });
 
  
@@ -194,41 +167,34 @@
         });
     }else{
         $("#plotno").empty();
-    }
-        
+    }        
    });
 
-      $('#size').on('change',function(){
-    var sizeID = $(this).val();  
+  $('#plotno').on('change',function(){
+    var plotnoID = $(this).val(); 
+    var plotno  =$( "#plotno option:selected" ).text(); 
+    var sizeID = $('#size').val(); 
     var locationID = $('#location').val(); 
-    if(sizeID){
+    if( plotnoID){
+        alert(plotno);
         $.ajax({
            type:"GET",
            url:"{{url('get-cost')}}",
-           data: {"size_id": sizeID,"location_id": locationID},
+           dataType:"json",
+           data: {"plotno": plotno,"size_id": sizeID,"location_id": locationID},
 
-           success:function(res){               
-            if(res){
-                $("#cost").empty();
-                $("#cost").append('<option>--Select cost--</option>');
-                $.each(res,function(key,value){
- 
-           $("#cost").append('<option value="'+key+'">'+value+'</option>');
-          
-                });
-
- 
-           
-            }else{
-               $("#cost").empty();
-            }
-           }
-        });
-    }else{
-        $("#cost").empty();
-    }
+           success:function(data){ 
+            
+                $("#cost").val(data);       
+                   
+                   }
+              });
+        }else{
+            $("#cost").empty();
+        }
         
    });
+
    
 
 </script>
