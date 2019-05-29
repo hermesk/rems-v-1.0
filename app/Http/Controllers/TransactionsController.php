@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\PaymentMode;
 use App\Transaction;
+use App\PaymentType;
 
 
 class TransactionsController extends Controller
@@ -34,9 +35,10 @@ class TransactionsController extends Controller
     public function create()
     {
         $paymentmodes = PaymentMode::all();
+        $paymentTypes = PaymentType::all();
         $locations = DB::table('locations')->pluck("name","id");
         $sizes = DB::table('sizes')->pluck("name","id");
-        return view('transaction.create',compact('locations','paymentmodes','sizes'));
+        return view('transaction.create',compact('locations','paymentmodes','paymentTypes','sizes'));
     }
 
     /**

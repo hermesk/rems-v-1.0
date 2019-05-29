@@ -41,6 +41,8 @@ class PaymentTypesController extends Controller
                'name'=>'required',
                'type'=>'required'
             ]);
+
+        $ptype = PaymentType::create($data);
         
         session()->flash('message','Payment Type Saved Successfuly');
 

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 @section('title','Record Transaction')
  <script src="http://www.codermen.com/js/jquery.js"></script>
 @section('content')
@@ -27,17 +27,18 @@
                   
                 </div>
 
-                <div class="col-md-4 form-group">   
-                    <label for="property">Property Type<span class="text-danger">*</span></label>
-                    <select name="property" id="property" class="form-control">
-                        <option value="">Select</option>
-                        <option value="Plot">Plot</option>
-                        <option value="House">House</option>    
+              <div class="col-md-4 form-group">   
+                    <label for="ptype">Being Payment for<span class="text-danger">*</span></label>
+                    <select name="paymentType" id="paymentType" class="form-control">
+                        <option value="">--- Select Payment Type ---</option>
+                                @foreach ($paymentTypes as $paymentType)
+                                <option value="{{$paymentType->id}}">{{ $paymentType->name}}</option>
+                                @endforeach  
                     </select>
                     
-                    <div>{{$errors->first('property')}}</div>
+                    <div>{{$errors->first('paymentType')}}</div>
                    
-                </div>
+                </div> 
 
                 </div>
                 <div class="row">
@@ -143,7 +144,6 @@
     var sizeID = $(this).val();  
     var locationID = $('#location').val();    
     if(sizeID){
-        alert(locationID);
         $.ajax({
            type:"GET",
            url:"{{url('get-plotno')}}",

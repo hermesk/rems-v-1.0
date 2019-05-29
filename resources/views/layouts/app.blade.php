@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
 
-    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 {{--     <script src="http://www.codermen.com/js/jquery.js"></script>
  --}}
     <!-- Fonts -->
@@ -36,8 +36,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                      @include('layouts.nav1')
+                     
                     </ul>
-
+                     @if(session()->has('message'))
+                           <div class="alert alert-success">
+                            {{ session('message') }}
+                           </div>
+                      @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
