@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\PaymentMode;
 use App\Transaction;
 use App\PaymentType;
+use Auth;
 
 
 class TransactionsController extends Controller
@@ -86,6 +87,7 @@ class TransactionsController extends Controller
               $client_id = DB::table('clients')
                            ->where('idno',$client_idno)
                            ->value('id');
+              $username = Auth::user()->name;
 
 
            //insert in trx table
@@ -102,6 +104,7 @@ class TransactionsController extends Controller
              $trx->amount = request('amount');
              $trx->reference = request('reference');
              $trx->narration = request('narration');
+             $trx->created_by =$username;
 
              $trx->save();
 

@@ -31,21 +31,24 @@
             <tr><th>Receipt No:</th><td>{{$receipt['rctno']}}</td></tr>
         
             <tr><th>Transaction Date:</th><td>{{$receipt['date']}}</td>
-                <th>Receipt Date:</th><td>{{date('Y-m-d H:i:s')}}</td></tr>
             <tr><th>Name:</th><td>{{$receipt['name']}}</td></tr>
             <tr><th>Being Payment of:</th><td>{{$receipt['ptype']}}</td>
                 <th>Location:</th><td>{{$receipt['location']}}</td>
             </tr>
-            <tr><th>Size:</th><td>{{$receipt['size']}}</td></tr>
-            <tr><th>Plot No:</th><td>{{$receipt['plotno']}}</td></tr>
-            <tr><th>Cost:</th><td>{{$receipt['cost']}}</td></tr>
-            <tr><th>Amount Paid:</th><td>{{$receipt['amount']}}</td></tr>
-            <tr><th>Payment Mode:</th><td>{{$receipt['pmode']}}</td></tr>
-            <tr><th>Description:</th><td>{{$receipt['narr']}}</td></tr>
+            <tr><th>Size:</th><td>{{$receipt['size']}}</td>
+                <th>Plot No:</th><td>{{$receipt['plotno']}}</td></tr>
+            <tr><th>Cost:</th><td>{{$receipt['cost']}}</td>
+             <th>Amount Paid:</th><td>{{$receipt['amount']}}</td></tr>
+            <tr><th>Payment Mode:</th><td>{{$receipt['pmode']}}</td>
+            <th>Description:</th><td>{{$receipt['narr']}}</td></tr>
             <tr><th>Amount in Words:</th><td>{{$receipt['amountinWords']}}</td></tr>
+            <tr><th>Deposited by</th><th>......................................</th>
+                <th>Signature ............................</th>
+            </tr>
               
             </table>
                 </div>
+                <div>You were Served by {{ Auth::user()->name }}  {{date('Y-m-d H:i:s')}}</div>
             </div>
         </div>
     </div>
