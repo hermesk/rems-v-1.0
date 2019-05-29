@@ -116,10 +116,19 @@ class TransactionsController extends Controller
                                           'client_id'=>$client_id
                                   ]);
 
+              $lastrctnoID  = DB::table('transactions')
+                              ->orderBy('id', 'desc')->pluck('id')
+                              ->first();
+                $newrctnoID = $lastrctnoID + 1;
+                $rctno = 'RLC'.$newrctnoID;
+                 
+
+
                                   //receipt details
                $receipt = array(
-                'name'  => request('name'),
-                'ptype'=>$payment_type,
+                'rctno' =>$rctno,
+                'name'  =>request('name'),
+                'ptype'=> $payment_type,
                 'location'=> $location,
                 'size' => $size,
                 'plotno'=>request('plotno'),

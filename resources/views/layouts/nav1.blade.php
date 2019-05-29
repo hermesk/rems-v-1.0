@@ -13,6 +13,9 @@
           <a class="nav-link" href="/property">Property Details</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/plots">Plot</a>
+          <a class="nav-link" href="{{route('payments.index')}}">Other Payments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('paymentType.index')}}">Payment Types</a>
         </li>
                  

@@ -28,9 +28,8 @@
                 <font>
                 </td>
             </tr> --}}                    
-                <h4>Transaction Receipt</h4>
-{{--                 <tr><th>Receipt No:</th><td>{{$receipt['rctno']}}</td></tr>
-         --}}
+            <tr><th>Receipt No:</th><td>{{$receipt['rctno']}}</td></tr>
+        
             <tr><th>Transaction Date:</th><td>{{$receipt['date']}}</td>
                 <th>Receipt Date:</th><td>{{date('Y-m-d H:i:s')}}</td></tr>
             <tr><th>Name:</th><td>{{$receipt['name']}}</td></tr>
