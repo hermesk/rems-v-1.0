@@ -67,7 +67,7 @@
                    
                 </div>
                 <div class="col-md-4 form-group">   
-                    <label for="plotno">Select Plot No<span class="text-danger">*</span></label>
+                    <label for="plotno">Select Plot No</label>
                     <select name="plotno" id="plotno" class="form-control" onchange="getPlotCost()">
                     
                     </select>
@@ -80,7 +80,7 @@
 
                 <div class="row">       
                 <div class="col-md-4 form-group">   
-                    <label for="cost">Cost<span class="text-danger">*</span></label>
+                    <label for="cost">Cost</label>
                     <input  type="text" name="cost" id="cost" class="form-control" placeholder="Cost" value="{{old('cost')}}" readonly >
                     <div>{{$errors->first('cost')}}</div>
                   
@@ -166,7 +166,7 @@
                 });
   
             }else{
-                $("#plotno").append('<option>--No Plot Available for this size--</option>');
+                $("#plotno").append('<option value="">--No Plot Available for this size--</option>');
                // $("#plotno").empty();
             }
            }
@@ -184,7 +184,6 @@
     var sizeID = $('#size').val(); 
     var locationID = $('#location').val(); 
     if( plotnoID){
-        alert(plotno);
         $.ajax({
            type:"GET",
            url:"{{url('get-cost')}}",
@@ -206,6 +205,10 @@
     function getName(){
 
        var search_idno = $('#idno').val();
+       if (search_idno.length == 0) {
+        alert("Enter IDNO to search client")
+           }
+       else{
         $.ajax({
             type:"GET",
             url: "{{url('get-client-name')}}",
@@ -222,6 +225,7 @@
              }
         });
     }
+    }
 
     //search client id
  function searchClientId()
@@ -234,12 +238,10 @@
             data: {"idno":search_idno},
             success: function(data) {                                
                  if ($.trim(data)) {
-                    alert(data);
                     $("#client_id").val(data).attr('readonly','true');
                       }
                  else{
-                    alert("hurray");
-                    //window.location.href = "{{route('clients.create')}}";
+                    
                 }
                
              }
@@ -251,7 +253,6 @@
     var clientID = $("#client_id").val();        
     var sizeID = $("#size").val(); 
     var locationID = $('#location').val();  
-    // alert(clientID);
     if(sizeID){
         $.ajax({
            type:"GET",

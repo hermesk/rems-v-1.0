@@ -21,8 +21,10 @@ Route::Resource('clients','ClientsController');
 
 
 //Transaction
+Route::get('transaction','TransactionsController@index')->name('transaction.index');
 Route::get('transaction/create','TransactionsController@create');
 Route::post('transaction','TransactionsController@store');
+Route::get('search','TransactionsController@searchtrx');
 
 //payment types
 Route::Resource('paymentType','PaymentTypesController');
@@ -54,11 +56,13 @@ Route::Resource('size','SizesController');
 
 //plotno
 Route::get('plots','PropertiesController@plotsindex');//plots
+Route::get('allocation','PropertiesController@takenPlots');//plots
 Route::get('/plots/create','PropertiesController@createplotno');
 Route::post('/plotno','PropertiesController@store');
 Route::get('plots/{plotno}','PropertiesController@show');
 Route::get('plots/{plotno}/edit','PropertiesController@edit');
 Route::patch('plots/{plotno}','PropertiesController@update');
+
 
 //dropdown dependents
 // Route::get('get-sizes','HousetrxsController@getSizes');

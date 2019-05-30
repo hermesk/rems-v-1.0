@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Http\Request;
 use App\Location;
@@ -24,6 +26,29 @@ class PropertiesController extends Controller
         return view('administrator.property.index');
     }
     
+    public function plotsAllocation()
+    {  
+        //$plotnos = Plotno::with('location','size')->get(); //eager loading
+         $plotnos = new Plotno();
+        return view('reports.plots',compact('plotnos'));
+    }
+
+    public function takenPlots()
+    {  
+           $plotnos = DB::table("plotnos")
+            ->where('status',1)
+            ->pluck("client_id");
+
+        return view('reports.plots',compact('plotnos'));
+    }
+    public function AvailablePlots()
+    {  
+           $plotnos = DB::table("plotnos")
+            ->whereNull('status');
+            
+        return view('reports.plots',compact('plotnos'));
+    }
+
      public function plotsindex()
     {  
         $plotnos = Plotno::with('location','size')->get(); //eager loading

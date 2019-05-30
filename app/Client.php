@@ -13,4 +13,13 @@ class client extends Model
 
      	return $this->hasMany(Payment::class);
      }
+
+     public function transactions(){
+
+     	return $this->hasMany(Transaction::class);
+     }
+      public function plotnos(){
+
+     	return $this->hasMany(Plotno::class);
+     }
 }

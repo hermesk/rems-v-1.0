@@ -20,5 +20,10 @@ class Location extends Model
     	return $this->hasMany(Size::class);
 
     }
+    public function transactions()
+    {
+    	return $this->hasMany(Transaction::class);
+
+    }
 
 }

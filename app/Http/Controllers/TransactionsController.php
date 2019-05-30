@@ -25,7 +25,9 @@ class TransactionsController extends Controller
     
     public function index()
     {
-        //
+        $trxs = Transaction::paginate(15);
+
+        return view('reports.transactions',compact('trxs'));
     }
 
     /**
@@ -57,8 +59,8 @@ class TransactionsController extends Controller
              'paymentType'=>'required',
              'location'=>'required',
              'size'=> 'required',
-             'plotno'=>'required',
-             'cost'=>'required|numeric',
+             'plotno'=>'nullable',
+             'cost'=>'nullable',
              'date'=> 'required|date',
              'paymentmode'=>'required',
              'amount'=>'required|numeric',
@@ -84,16 +86,23 @@ class TransactionsController extends Controller
               $payment_type = DB::table('payment_types')->where('id', $payment_type_id)->value('name');
               //get client_id
               $client_idno = request('idno');
-              $client_id = DB::table('clients')
-                           ->where('idno',$client_idno)
-                           ->value('id');
+              // $client_id = DB::table('clients')
+              //              ->where('idno',$client_idno)
+              //              ->value('id');
               $username = Auth::user()->name;
+              //rctno
+              $lastrctnoID  = DB::table('transactions')
+                              ->orderBy('id', 'desc')->pluck('id')
+                              ->first();
+                $newrctnoID = $lastrctnoID + 1;
+                $rctno = 'RLC'.$newrctnoID;
 
 
            //insert in trx table
              $trx = new Transaction();
-
-             $trx->client_id = $client_id;
+             
+             $trx->receiptno = $rctno;
+             $trx->client_id = $client_idno;
              $trx->payment_type_id = request('paymentType');
              $trx->location_id = request('location');
              $trx->size_id = request('size');
@@ -116,14 +125,10 @@ class TransactionsController extends Controller
                                 ->where('size_id', $size_id)
                                 ->where('plotno', $plotno)
                                 ->update(['status' => 1,
-                                          'client_id'=>$client_id
+                                          'client_id'=>$client_idno
                                   ]);
 
-              $lastrctnoID  = DB::table('transactions')
-                              ->orderBy('id', 'desc')->pluck('id')
-                              ->first();
-                $newrctnoID = $lastrctnoID + 1;
-                $rctno = 'RLC'.$newrctnoID;
+              
                  
 
 
@@ -242,5 +247,14 @@ class TransactionsController extends Controller
             ->pluck("cost");
 
             return json_encode($cost);
+        }
+
+        public function searchtrx(Request $request){
+
+            //$search = $request->get('search');
+            $trxs = DB::table('transactions')
+                        ->where("id",2)->paginate(15);
+                        //->get();
+            return view('reports.transactions',compact('trxs'));
         }
 }

@@ -110,8 +110,8 @@ class ClientsController extends Controller
         return request()->validate([
              'name'=>'required|string|max:50',
              'idno'=> 'required|min:7|unique:clients',
-             'mobile'=>'required|numeric|min:10',
-             'kra_pin'=>'nullable|min:8'  
+             'mobile'=>'required|numeric|min:10|unique:clients',
+             'kra_pin'=>'nullable|min:8|unique:clients'  
                   ]);
 
     }
