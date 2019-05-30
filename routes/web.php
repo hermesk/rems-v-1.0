@@ -37,7 +37,8 @@ Route::post('payments','PaymentsController@store')->name('payments.store');
 Route::get('get-client-name','TransactionsController@getClient');
 Route::get('get-plotno','TransactionsController@getPlotnos');
 Route::get('get-cost','TransactionsController@getCost');
-
+Route::get('get-client-id','TransactionsController@getClientId');
+Route::get('get-client-plots','TransactionsController@getClientPlots');
 
 //property details
 Route::get('property','PropertiesController@index');

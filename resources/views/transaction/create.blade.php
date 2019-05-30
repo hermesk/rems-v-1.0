@@ -22,8 +22,9 @@
 
                 <div class="col-md-4 form-group">   
                     <label for="name">Name<span class="text-danger">*</span></label>
-                    <input  type="text" name="name" id="name" class="form-control" placeholder="name" value="{{old('name')}}">
+                    <input  type="text" name="name" id="name" class="form-control" placeholder="name" value="{{old('name')}}" readonly onclick="getName()">
                     <div>{{$errors->first('name')}}</div>
+
                   
                 </div>
 
@@ -44,7 +45,7 @@
                 <div class="row">
                  <div class="form-group col-md-4">      
                     <label for="location">Select Location<span class="text-danger">*</span></label>
-                    <select name="location" id="location" class="form-control">
+                    <select name="location" id="location" class="form-control"  onchange="searchClientId()">
                         <option value="">--- Select Location ---</option>
                                 @foreach ($locations as $key => $value)
                                 <option value="{{ $key }}">{{ $value }}</option>
@@ -55,7 +56,7 @@
 
                 <div class="col-md-4 form-group">   
                 <label for="size">Size<span class="text-danger">*</span></label>
-                  <select name="size" id="size" class="form-control">
+                  <select name="size" id="size" class="form-control" onchange="getClientPlots()">
                         <option value="">Select Size</option>
                        @foreach ($sizes as $key => $value)
                                 <option value="{{ $key }}">{{ $value }}</option>
@@ -67,7 +68,7 @@
                 </div>
                 <div class="col-md-4 form-group">   
                     <label for="plotno">Select Plot No<span class="text-danger">*</span></label>
-                    <select name="plotno" id="plotno" class="form-control">
+                    <select name="plotno" id="plotno" class="form-control" onchange="getPlotCost()">
                     
                     </select>
                     
@@ -123,6 +124,9 @@
                     </div>
 
                 </div>
+                <div>
+                    <input type="hidden" name="client_id" id="client_id">
+                </div>
              <div class="box-footer">
                     <cancle-button text="Cancel"  type="reset" ></cancle-button>
                     <my-button type="submit" text="Add"></my-button>
@@ -140,38 +144,42 @@
 
   <script type="text/javascript">
 
-    $('#size').on('change',function(){
-    var sizeID = $(this).val();  
-    var locationID = $('#location').val();    
+    //get plot nos
+    function getPlots()
+    {        
+    var sizeID = $("#size").val(); 
+    var locationID = $('#location').val();  
+
     if(sizeID){
         $.ajax({
            type:"GET",
            url:"{{url('get-plotno')}}",
            data: {"size_id": sizeID,"location_id": locationID},
            success:function(res){               
-            if(res){
+            if($.trim(res)){
                 $("#plotno").empty();
                 $("#plotno").append('<option>--Select Plot No--</option>');
 
                 $.each(res,function(key,value){
-                    	          
-		      $('#plotno').append('<option value="'+key+'">'+value+'</option>');	                          
+                                  
+              $('#plotno').append('<option value="'+key+'">'+value+'</option>');                              
                 });
-
- 
-           
+  
             }else{
-               $("#plotno").empty();
+                $("#plotno").append('<option>--No Plot Available for this size--</option>');
+               // $("#plotno").empty();
             }
            }
         });
     }else{
         $("#plotno").empty();
-    }        
-   });
+    } 
+    } //end of get plots
 
-  $('#plotno').on('change',function(){
-    var plotnoID = $(this).val(); 
+ //get plot cost
+   function getPlotCost()
+   {
+    var plotnoID = $("#plotno").val(); 
     var plotno  =$( "#plotno option:selected" ).text(); 
     var sizeID = $('#size').val(); 
     var locationID = $('#location').val(); 
@@ -192,38 +200,86 @@
         }else{
             $("#cost").empty();
         }
-        
-   });
+   }
+
   //search client name
-   $(document).ready(function(){
+    function getName(){
 
-    $('#name').on('click', function(){
-
-        var search_idno = $('#idno').val();
-        //alert(search_idno);
-
+       var search_idno = $('#idno').val();
         $.ajax({
             type:"GET",
             url: "{{url('get-client-name')}}",
             dataType:"json",
             data: {"idno":search_idno},
-            success: function(data) {
-                 //alert(data);
+            success: function(data) {                                
                  if ($.trim(data)) {
-                    $("#name").val(data).attr('readonly','true');
-                    //$('#name').attr('readonly','true');
-                 }
+                    $("#name").val(data);
+                      }
                  else{
                     alert("IDNO " +search_idno+ " does No exist.Register the client");
-                    window.location.href = "{{route('clients.create')}}"; 
-                   
-                    
-                 }
+                    window.location.href = "{{route('clients.create')}}";
+                }               
+             }
+        });
+    }
+
+    //search client id
+ function searchClientId()
+ {
+        var search_idno = $('#idno').val();
+        $.ajax({
+            type:"GET",
+            url: "{{url('get-client-id')}}",
+            dataType:"json",
+            data: {"idno":search_idno},
+            success: function(data) {                                
+                 if ($.trim(data)) {
+                    alert(data);
+                    $("#client_id").val(data).attr('readonly','true');
+                      }
+                 else{
+                    alert("hurray");
+                    //window.location.href = "{{route('clients.create')}}";
+                }
                
              }
         });
-    });
-});
+ }
+    //get client plots
+    function getClientPlots()
+    {  
+    var clientID = $("#client_id").val();        
+    var sizeID = $("#size").val(); 
+    var locationID = $('#location').val();  
+    // alert(clientID);
+    if(sizeID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('get-client-plots')}}",
+           data: {"client_id": clientID,"size_id": sizeID,"location_id": locationID},
+           success:function(res){               
+            if($.trim(res)){
+
+                $("#plotno").empty();
+                $("#plotno").append('<option>--Select Plot No--</option>');
+
+                $.each(res,function(key,value){
+                                  
+              $('#plotno').append('<option value="'+key+'">'+value+'</option>');                              
+                });
+             $('#plotno').append('<option><a onClick="getPlots();" style="cursor: pointer; cursor: hand;">*New Plot*</a></option>');
+ 
+           
+            }else{
+                getPlots();
+               
+            }
+           }
+        });
+    }else{
+        $("#plotno").empty();
+    } 
+    } //end of get plots
 
    
 

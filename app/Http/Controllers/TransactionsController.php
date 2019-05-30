@@ -192,6 +192,14 @@ class TransactionsController extends Controller
         //
     }
 
+    public function getClientId(Request $request) 
+    {
+
+            $clientid = DB::table('clients')->where('idno', $request->idno)
+                          ->pluck("id");
+
+            return response()->json($clientid);
+    }
     public function getClient(Request $request) 
     {
 
@@ -199,7 +207,7 @@ class TransactionsController extends Controller
                           ->pluck("name");
 
             return response()->json($client_name);
-            }
+    }
       
 
      public function getPlotnos(Request $request)
@@ -212,6 +220,18 @@ class TransactionsController extends Controller
 
             return response()->json($plotnos);
         }
+        //get client taken plots
+        public function getClientPlots(Request $request)
+        {
+            $client_plots = DB::table("plotnos")
+            ->where("size_id",$request->size_id)
+            ->where("location_id",$request->location_id)
+            ->where("client_id",$request->client_id)
+            ->pluck("plotno","id");
+
+            return response()->json($client_plots);
+        }
+
         public function getCost(Request $request)
         {
           
