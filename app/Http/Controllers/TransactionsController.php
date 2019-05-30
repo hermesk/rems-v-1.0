@@ -191,6 +191,15 @@ class TransactionsController extends Controller
     {
         //
     }
+
+    public function getClient(Request $request) 
+    {
+
+            $client_name = DB::table('clients')->where('idno', $request->idno)
+                          ->pluck("name");
+
+            return response()->json($client_name);
+            }
       
 
      public function getPlotnos(Request $request)

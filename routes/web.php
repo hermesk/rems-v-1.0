@@ -34,7 +34,7 @@ Route::get('payments/create','PaymentsController@create')->name('payments.create
 Route::post('payments','PaymentsController@store')->name('payments.store');
 
 //dropdown depenents
-Route::get('get-sizes','TransactionsController@getSizes');
+Route::get('get-client-name','TransactionsController@getClient');
 Route::get('get-plotno','TransactionsController@getPlotnos');
 Route::get('get-cost','TransactionsController@getCost');
 

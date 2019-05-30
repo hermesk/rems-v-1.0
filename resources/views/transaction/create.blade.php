@@ -15,14 +15,14 @@
                   <div class="col-md-4 form-group">
                     
                      <label for="idno">ID No.<span class="text-danger">*</span></label>
-                        <input type="text" name="idno" class="form-control" placeholder="ID number" value="{{old('idno')}}" >
+                        <input type="text" name="idno" id="idno" class="form-control" placeholder="ID number" value="{{old('idno')}}" >
                          <div>{{$errors->first('idno')}}</div>
                    
                  </div>
 
                 <div class="col-md-4 form-group">   
                     <label for="name">Name<span class="text-danger">*</span></label>
-                    <input  type="text" name="name" class="form-control" placeholder="name" value="{{old('name')}}">
+                    <input  type="text" name="name" id="name" class="form-control" placeholder="name" value="{{old('name')}}">
                     <div>{{$errors->first('name')}}</div>
                   
                 </div>
@@ -194,6 +194,36 @@
         }
         
    });
+  //search client name
+   $(document).ready(function(){
+
+    $('#name').on('click', function(){
+
+        var search_idno = $('#idno').val();
+        //alert(search_idno);
+
+        $.ajax({
+            type:"GET",
+            url: "{{url('get-client-name')}}",
+            dataType:"json",
+            data: {"idno":search_idno},
+            success: function(data) {
+                 //alert(data);
+                 if ($.trim(data)) {
+                    $("#name").val(data).attr('readonly','true');
+                    //$('#name').attr('readonly','true');
+                 }
+                 else{
+                    alert("IDNO " +search_idno+ " does No exist.Register the client");
+                    window.location.href = "{{route('clients.create')}}"; 
+                   
+                    
+                 }
+               
+             }
+        });
+    });
+});
 
    
 
