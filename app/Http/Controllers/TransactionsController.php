@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\PaymentMode;
 use App\Transaction;
 use App\PaymentType;
+use App\transactions_receipt;
 use Auth;
 
 
@@ -134,20 +135,20 @@ class TransactionsController extends Controller
 
                                   //receipt details
                $receipt = array(
-                'rctno' =>$rctno,
+                'receiptno' =>$rctno,
                 'name'  =>request('name'),
-                'ptype'=> $payment_type,
+                'type'=> $payment_type,
                 'location'=> $location,
                 'size' => $size,
                 'plotno'=>request('plotno'),
                 'cost' => request('cost'),
                 'amount'=>request('amount'),
-                'pmode' =>$pmode,
+                'mode' =>$pmode,
                 'date' =>request('date'),
-                'narr' =>request('narration'),
-                'amountinWords' => $amount
-
-            );
+                'narration' =>request('narration'),
+                'amount_in_words' => $amount
+              );
+               $rct = transactions_receipt::create($receipt);
             return view('Template.transaction_receipt',compact('receipt'));
 
     }
@@ -253,7 +254,7 @@ class TransactionsController extends Controller
 
             //$search = $request->get('search');
             $trxs = DB::table('transactions')
-                        ->where("id",2)->paginate(15);
+                        ->where("client_id",29180166)->paginate(15);
                         //->get();
             return view('reports.transactions',compact('trxs'));
         }

@@ -124,9 +124,7 @@
                     </div>
 
                 </div>
-                {{-- <div>
-                    <input type="hidden" name="client_id" id="client_id">
-                </div> --}}
+               
              <div class="box-footer">
                     <cancle-button text="Cancel"  type="reset" ></cancle-button>
                     <my-button type="submit" text="Add"></my-button>
@@ -227,26 +225,6 @@
     }
     }
 
-    //search client id
- // function searchClientId()
- // {
- //        var search_idno = $('#idno').val();
- //        $.ajax({
- //            type:"GET",
- //            url: "url('get-client-id')}}",
- //            dataType:"json",
- //            data: {"idno":search_idno},
- //            success: function(data) {                                
- //                 if ($.trim(data)) {
- //                    $("#client_id").val(data).attr('readonly','true');
- //                      }
- //                 else{
-                    
- //                }
-               
- //             }
- //        });
- // }
     //get client plots
     function getClientPlots()
     {  
