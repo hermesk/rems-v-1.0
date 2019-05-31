@@ -45,7 +45,7 @@
                 <div class="row">
                  <div class="form-group col-md-4">      
                     <label for="location">Select Location<span class="text-danger">*</span></label>
-                    <select name="location" id="location" class="form-control"  onchange="searchClientId()">
+                    <select name="location" id="location" class="form-control">
                         <option value="">--- Select Location ---</option>
                                 @foreach ($locations as $key => $value)
                                 <option value="{{ $key }}">{{ $value }}</option>
@@ -124,9 +124,9 @@
                     </div>
 
                 </div>
-                <div>
+                {{-- <div>
                     <input type="hidden" name="client_id" id="client_id">
-                </div>
+                </div> --}}
              <div class="box-footer">
                     <cancle-button text="Cancel"  type="reset" ></cancle-button>
                     <my-button type="submit" text="Add"></my-button>
@@ -228,25 +228,25 @@
     }
 
     //search client id
- function searchClientId()
- {
-        var search_idno = $('#idno').val();
-        $.ajax({
-            type:"GET",
-            url: "{{url('get-client-id')}}",
-            dataType:"json",
-            data: {"idno":search_idno},
-            success: function(data) {                                
-                 if ($.trim(data)) {
-                    $("#client_id").val(data).attr('readonly','true');
-                      }
-                 else{
+ // function searchClientId()
+ // {
+ //        var search_idno = $('#idno').val();
+ //        $.ajax({
+ //            type:"GET",
+ //            url: "url('get-client-id')}}",
+ //            dataType:"json",
+ //            data: {"idno":search_idno},
+ //            success: function(data) {                                
+ //                 if ($.trim(data)) {
+ //                    $("#client_id").val(data).attr('readonly','true');
+ //                      }
+ //                 else{
                     
-                }
+ //                }
                
-             }
-        });
- }
+ //             }
+ //        });
+ // }
     //get client plots
     function getClientPlots()
     {  

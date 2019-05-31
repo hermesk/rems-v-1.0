@@ -197,14 +197,14 @@ class TransactionsController extends Controller
         //
     }
 
-    public function getClientId(Request $request) 
-    {
+    // public function getClientId(Request $request) 
+    // {
 
-            $clientid = DB::table('clients')->where('idno', $request->idno)
-                          ->pluck("id");
+    //         $clientid = DB::table('clients')->where('idno', $request->idno)
+    //                       ->pluck("id");
 
-            return response()->json($clientid);
-    }
+    //         return response()->json($clientid);
+    // }
     public function getClient(Request $request) 
     {
 
