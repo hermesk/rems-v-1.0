@@ -9,7 +9,7 @@ use App\Location;
 use App\Size;
 use App\Plotno;
 
-class PropertiesController extends Controller
+class PlotnosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,32 +26,33 @@ class PropertiesController extends Controller
         return view('administrator.property.index');
     }
     
-    public function plotsAllocation()
-    {  
-        //$plotnos = Plotno::with('location','size')->get(); //eager loading
-         $plotnos = new Plotno();
-        return view('reports.plots',compact('plotnos'));
-    }
+    // public function plotsAllocation()
+    // {  
+    //     //$plotnos = Plotno::with('location','size')->get(); //eager loading
+    //      $plotnos = new Plotno();
+    //     return view('reports.plots',compact('plotnos'));
+    // }
 
-    public function takenPlots()
-    {  
-           $plotnos = DB::table("plotnos")
-            ->where('status',1)
-            ->pluck("client_id");
+    // public function takenPlots()
+    // {  
+    //        $plotnos = DB::table("plotnos")
+    //         ->where('status',1)
+    //         ->pluck("client_id");
 
-        return view('reports.plots',compact('plotnos'));
-    }
-    public function AvailablePlots()
-    {  
-           $plotnos = DB::table("plotnos")
-            ->whereNull('status');
+    //     return view('reports.plots',compact('plotnos'));
+    // }
+    // public function AvailablePlots()
+    // {  
+    //        $plotnos = DB::table("plotnos")
+    //         ->whereNull('status');
             
-        return view('reports.plots',compact('plotnos'));
-    }
+    //     return view('reports.plots',compact('plotnos'));
+    // }
 
      public function plotsindex()
     {  
-        $plotnos = Plotno::with('location','size')->get(); //eager loading
+        $plotnos = Plotno::with('location','size')->paginate(15);
+        //->get(); //eager loading
          
         return view('administrator.property.plotno.index',compact('plotnos'));
     }
@@ -184,7 +185,7 @@ class PropertiesController extends Controller
      */
  
 
-    public function destroySize()
+    public function destroy()
     {
        
     }

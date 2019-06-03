@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <?php 
-    echo "<script>ConfirmPrint();</script>";
-   ?>
+   
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -19,7 +17,7 @@
                 0746 517010<br/> <font>
                 </td>
                 <td>
-                {{-- <img src="images/gakuyo.png"  /> --}}
+               {{--  <image img src="/img/logo.png" alt="Logo"></image> --}}
                  <font size="0.5"><P><b>YOUR SOLUTION IN LAND & HOME CONSULTANCY</b></P>
                  </font>
                 </td>
@@ -45,7 +43,7 @@
             <tr><th>Payment Mode:</th><td>{{$receipt['mode']}}</td>
             <th>Description:</th><td>{{$receipt['narration']}}</td></tr>
             <tr><th>Amount in Words:</th><td>{{$receipt['amount_in_words']}}</td></tr>
-            <tr><th>Deposited by</th><th>......................................</th>
+            <tr><th>Deposited by</th><th>.............................................................</th>
                 <th>Signature ............................</th>
             </tr>
             </table>
@@ -63,14 +61,6 @@
          
        </div>
 </div>
-
- <script type="text/javascript">
-     function ConfirmPrint(){
-        return confirm("Are you sure?");
-     }
-
- </script>
-
 
 @endsection
 

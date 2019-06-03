@@ -13,4 +13,9 @@ class PaymentType extends Model
 
     	return $this->hasMany(Transaction::class);
     }
+
+    public function payments(){
+
+    	return $this->hasMany(Payment::class);
+    }
 }

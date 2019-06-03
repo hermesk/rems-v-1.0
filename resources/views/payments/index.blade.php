@@ -14,7 +14,6 @@
              <table>
 				<thead>
 				<tr>
-				<th width="20%">ID No</th>
 			    <th width="20%">Name</th>
 			    <th width="10%">Amount</th>
 			    <th width="20%">Payment for</th>
@@ -25,10 +24,12 @@
 
 			  @foreach($payments as $payment)
 			 <tr>
-			 	<td>{{$payment->idno}}</td>
+			 	<td>{{$payment->name}}</td>
 			 	{{-- <td>{{$payment->client->name}} --}}
 			 	{{-- <a href="{{route('clients.show',['client'=>$client])}}">
-			 		{{$payment->client->name}}</a> --}}
+			 		{{$payment->client->name}}</a> 
+<td>{{$payment->paymentType->name}}</td>
+			 		--}}
 			 	</td>
 			 	
 			 	<td>{{$payment->amount}}</td>

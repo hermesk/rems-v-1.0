@@ -16,8 +16,12 @@
 					<select name="location_id" id="location_id" class="form-control">
 						<option value="">Select location</option>
 						@foreach($locations as $location)
-						<option value="{{$location->id}}">{{$location->name}}</option>
+						<option value="{{$location->id}}"
+							{{ $location->id == $plotno->location_id ? 'selected' : '' }}>
+							{{$location->name}}
+						</option>
 						@endforeach
+
 					</select>
 					     <div>{{$errors->first('location_id')}}</div>
 				 </div>	
@@ -28,7 +32,9 @@
 					<select name="size_id" id="size_id" class="form-control">
 						<option value="">Select Size</option>
 						@foreach($sizes as $size)
-						<option value="{{$size->id}}">{{$size->name}}</option>
+						<option value="{{$size->id}}"
+							{{ $size->id == $plotno->size_id ? 'selected' : '' }}>{{$size->name}}
+						</option>
 						@endforeach
 					</select>
 					

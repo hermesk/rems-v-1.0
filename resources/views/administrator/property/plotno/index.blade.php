@@ -13,8 +13,9 @@
 				<tr>
 			    <th width="20%">Location</th>
 			    <th width="20%">Size</th>
-			    <th width="20%">Plot numbers</th>
+			    <th width="20%">Plot Number</th>
 			    <th width="20%">Cost</th>
+			    <th width="20%">Status</th>
 
 			  </tr>
 			</thead>
@@ -38,10 +39,18 @@
 			 	<td>
 			 		{{$plot->cost}}
 			 	</td>
+			 	<td>
+			 		{{$plot->status ? 'Taken':'Available'}}
+			 	</td>
 			 </tr>
 			    @endforeach
 			    </tbody>
 			</table>
+			<div class="row">
+            	<div class="col-12 d-flex justify-content-center pt-4">
+            		{{$plotnos->links()}}
+            	</div>
+            </div>
             </div>
         </div>
     </div>

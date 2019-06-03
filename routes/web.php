@@ -42,7 +42,7 @@ Route::get('get-cost','TransactionsController@getCost');
 Route::get('get-client-plots','TransactionsController@getClientPlots');
 
 //property details
-Route::get('property','PropertiesController@index');
+Route::get('property','PlotnosController@index');
 
 //location
 Route::Resource('location','LocationsController');
@@ -54,13 +54,13 @@ Route::Resource('size','SizesController');
 
 
 //plotno
-Route::get('plots','PropertiesController@plotsindex');//plots
-Route::get('allocation','PropertiesController@takenPlots');//plots
-Route::get('/plots/create','PropertiesController@createplotno');
-Route::post('/plotno','PropertiesController@store');
-Route::get('plots/{plotno}','PropertiesController@show');
-Route::get('plots/{plotno}/edit','PropertiesController@edit');
-Route::patch('plots/{plotno}','PropertiesController@update');
+Route::get('plots','PlotnosController@plotsindex');//plots
+Route::get('allocation','PlotnosController@takenPlots');//plots
+Route::get('/plots/create','PlotnosController@createplotno');
+Route::post('/plotno','PlotnosController@store');
+Route::get('plots/{plotno}','PlotnosController@show');
+Route::get('plots/{plotno}/edit','PlotnosController@edit');
+Route::patch('plots/{plotno}','PlotnosController@update');
 
 
 //dropdown dependents
