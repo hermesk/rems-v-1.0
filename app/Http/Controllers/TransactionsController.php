@@ -26,7 +26,7 @@ class TransactionsController extends Controller
     
     public function index()
     {
-        $trxs = Transaction::paginate(15);
+        $trxs = transactions_receipt::paginate(15);
 
         return view('reports.transactions',compact('trxs'));
     }

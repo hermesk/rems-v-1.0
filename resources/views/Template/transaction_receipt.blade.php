@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    <?php 
+    echo "<script>ConfirmPrint();</script>";
+   ?>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -45,15 +48,34 @@
             <tr><th>Deposited by</th><th>......................................</th>
                 <th>Signature ............................</th>
             </tr>
-              
             </table>
+            <div>You were Served by {{ Auth::user()->name }}{{date('Y-m-d H:i:s')}}</div>
                 </div>
-                <div>You were Served by {{ Auth::user()->name }}  {{date('Y-m-d H:i:s')}}</div>
+                
             </div>
         </div>
+   
     </div>
+     <div class="row no-print justify-content-center">
+           <button id="print">
+                 <a href="" @click.prevent="printme" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+           </button>
+         
+       </div>
 </div>
+
+ <script type="text/javascript">
+     function ConfirmPrint(){
+        return confirm("Are you sure?");
+     }
+
+ </script>
+
+
 @endsection
+
+
+
 
 
 

@@ -10684,3 +10684,9 @@ form {
   text-align: center;
 }
 
+@media print {
+  #print {
+    display: none;
+  }
+}
+

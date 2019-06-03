@@ -137,7 +137,9 @@ class PropertiesController extends Controller
 
    public function edit(Plotno $plotno)
     {
-        return view('administrator.property.plotno.edit',compact('plotno'));
+        $locations = Location::all();
+        $sizes = Size::all();
+        return view('administrator.property.plotno.edit',compact('plotno','locations','sizes'));
  
     }
 
@@ -151,14 +153,26 @@ class PropertiesController extends Controller
    
    public function update(Plotno $plotno)
     {
-       
-          $data = request()->validate([
-            'plotno'=>'required'
+        $data = request()->validate([
+            'plotno'=>'required',
+            'location_id'=>'required',
+            'size_id'=> 'required',
+            'cost'=> 'required'
         ]);
+        //dd($data);
+        //    $update_plotno = DB::table('plotnos')
+        //                         ->where('id',$plotno)
+        //                         ->where('size_id', $size_id)
+        //                         ->where('plotno', $plotno)
+        //                         ->update(['status' => 1,
+        //                                   'client_id'=>$client_idno
+        //                           ]);
+
           $plotno->update($data);
 
           session()->flash('message',' Plot Numbers Updated Successfully');
-        return redirect('/plots/'.$plotno->id);
+        // return redirect('/plots/'.$plotno->id);
+          return redirect('plots');
 
     }
 

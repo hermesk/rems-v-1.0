@@ -60,25 +60,28 @@ class PaymentsController extends Controller
           $pmode = DB::table('payment_modes')->where('id', $pmode_id )->value('name');
 
           //generate receipt no
-          // $rctno = payments_receipt::latest()->first();
-          // $lastrctnoID = $rctno->orderBy('id', DESC)->pluck('id')->first();
-          // $newrctnoID =  $lastrctnoID + 1;
+         $lastrctnoID  = DB::table('transactions')
+                              ->orderBy('id', 'desc')->pluck('id')
+                              ->first();
+                $newrctnoID = $lastrctnoID + 1;
+                $rctno = 'RLC'.$newrctnoID;
 
 
 
        $receipt = array(
-            //'rctno'=>$newrctnoID,
+            'receiptno'=>$rctno,
             'name'  => request('name'),
             'mobile'=>request('mobile'),
             'amount'=>request('amount'),
-            'pmode' =>$pmode,
-            'ptype' =>request('ptype'),
-            'narr'  =>request('narration'),
-            'amountinWords' => $amount
+            'mode' =>$pmode,
+            'type' =>request('ptype'),
+            'narration'  =>request('narration'),
+            'amount_in_words' => $amount           
 
             );
 
        $payment = Payment::create($data);
+        $rct = payments_receipt::create($receipt);
        //session()->flash('message',' Payment Saved Successfully');
        return view('Template.payments_receipt',compact('receipt'));
 

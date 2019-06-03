@@ -50012,7 +50012,12 @@ Vue.component('cancle-button', __webpack_require__(/*! ./components/cancle-butto
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  methods: {
+    printme: function printme() {
+      window.print();
+    }
+  }
 });
 
 /***/ }),

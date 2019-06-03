@@ -19,8 +19,8 @@ class CreatePaymentsReceiptsTable extends Migration
             $table->string('name');
             $table->string('mobile');
             $table->string('amount');
-            $table->string('paymentmode_id');
-            $table->string('paymentType');
+            $table->string('mode');
+            $table->string('type');
             $table->string('narration');
             $table->string('amount_in_words');
             $table->string('created_by')->nullable();

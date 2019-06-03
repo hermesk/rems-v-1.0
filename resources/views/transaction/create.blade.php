@@ -228,7 +228,7 @@
     //get client plots
     function getClientPlots()
     {  
-    var clientID = $("#client_id").val();        
+    var clientID = $("#idno").val();        
     var sizeID = $("#size").val(); 
     var locationID = $('#location').val();  
     if(sizeID){
