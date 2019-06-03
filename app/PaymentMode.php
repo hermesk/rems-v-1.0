@@ -8,7 +8,10 @@ class PaymentMode extends Model
 {
      protected $fillable = ['name'];
 
-     public function transaction(){
-     	return $this->belongsTo(Transaction::class);
+     public function payments(){
+     	return $this->hasMany(Payment::class);
+     }
+     public function transactions(){
+     	return $this->hasMany('App\Transaction');
      }
 }

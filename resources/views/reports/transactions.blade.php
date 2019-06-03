@@ -28,8 +28,8 @@
 			    <th width="10%">Mode</th>
 			    <th width="10%">Plotno</th>
 			    <th width="10%">Amount</th>
-{{-- 			    <th width="10%">Created by</th>
- --}}
+			    <th width="10%">Created by</th>
+
 			  </tr>
 			</thead>
 			<tbody>
@@ -37,15 +37,15 @@
 			  @foreach($trxs as $trx)
 			 <tr>
 			 	<td>{{$trx->receiptno}}</td>
-			 	<td>{{$trx->name}}</td>
-			 	<td>{{$trx->type}}</td>
-			 	<td>{{$trx->location}}</td>
-			 	<td>{{$trx->size}}</td>
-			 	<td>{{$trx->mode}}</td>
+			 	<td>{{$trx->client_id}}</td>
+			 	<td>{{$trx->paymentType->name}}</td>
+			 	<td>{{$trx->location->name}}</td>
+			 	<td>{{$trx->size->name}}</td>
+			 	<td>{{$trx->mode->name}}</td>
 			 	<td>{{$trx->plotno}}</td>
 			 	<td>{{$trx->amount}}</td>
-{{-- 			 	<td>{{$trx->created_by}}</td>
- --}}
+			 	<td>{{$trx->created_by}}</td>
+
 			 </tr>
 			    @endforeach
 			    </tbody>

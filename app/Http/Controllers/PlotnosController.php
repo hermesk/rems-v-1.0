@@ -56,6 +56,13 @@ class PlotnosController extends Controller
          
         return view('administrator.property.plotno.index',compact('plotnos'));
     }
+     public function plotsReport()
+    {  
+        $plotnos = Plotno::with('location','size')->paginate(15);
+        //->get(); //eager loading
+         
+        return view('reports.plots',compact('plotnos'));
+    }
     /**
      * Show the form for creating a new resource.
      *

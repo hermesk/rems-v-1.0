@@ -10,7 +10,7 @@ class Transaction extends Model
 
    public function client(){
 
-   	return $this->belongsTo(Client::class);
+   	return $this->belongsTo('App\Client','client_id');
    }
    public function location(){
 
@@ -21,12 +21,12 @@ class Transaction extends Model
 
    	return $this->belongsTo(Size::class);
    }
-   public function type(){
+   public function paymentType(){
 
-   	return $this->belongsTo(PaymentType::class);
+   	return $this->belongsTo('App\PaymentType','payment_type_id');
    }
 
-   public function modes(){
-   	return $this->hasMany(PaymentMode::class);
+   public function mode(){
+   	return $this->belongsTo('App\PaymentMode','paymentmode_id');
    }
 }

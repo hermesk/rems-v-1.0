@@ -33,8 +33,8 @@
 			 	</td>
 			 	
 			 	<td>{{$payment->amount}}</td>
-			 	<td>{{$payment->ptype}}</td>
-			 	<td>{{$payment->paymentmode}}</td>
+			 	<td>{{$payment->paymentType->name}}</td>
+			 	<td>{{$payment->paymentMode->name}}</td>
 
 			 </tr>
 			    @endforeach

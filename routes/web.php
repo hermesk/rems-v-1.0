@@ -61,6 +61,7 @@ Route::post('/plotno','PlotnosController@store');
 Route::get('plots/{plotno}','PlotnosController@show');
 Route::get('plots/{plotno}/edit','PlotnosController@edit');
 Route::patch('plots/{plotno}','PlotnosController@update');
+Route::get('plots-report','PlotnosController@plotsReport');//plots
 
 
 //dropdown dependents

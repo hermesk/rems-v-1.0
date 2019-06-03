@@ -9,12 +9,12 @@ class Payment extends Model
     protected $fillable = ['name','ptype','paymentmode','amount','reference','narration'];
 
 
-    public function client(){
+    public function paymentMode(){
 
-    	return $this->belongsTo(Client::class);
+    	return $this->belongsTo(PaymentMode::class,'paymentmode');
     }
      public function paymentType(){
 
-    	return $this->belongsTo(PaymentType::class);
+    	return $this->belongsTo(PaymentType::class,'ptype');
     }
 }
