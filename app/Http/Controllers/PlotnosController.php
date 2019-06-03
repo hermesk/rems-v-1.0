@@ -160,20 +160,13 @@ class PlotnosController extends Controller
             'size_id'=> 'required',
             'cost'=> 'required'
         ]);
-        //dd($data);
-        //    $update_plotno = DB::table('plotnos')
-        //                         ->where('id',$plotno)
-        //                         ->where('size_id', $size_id)
-        //                         ->where('plotno', $plotno)
-        //                         ->update(['status' => 1,
-        //                                   'client_id'=>$client_idno
-        //                           ]);
-
+        
+    
           $plotno->update($data);
 
           session()->flash('message',' Plot Numbers Updated Successfully');
-        // return redirect('/plots/'.$plotno->id);
-          return redirect('plots');
+        return redirect('/plots/'.$plotno->id);
+          //return redirect('plots');
 
     }
 

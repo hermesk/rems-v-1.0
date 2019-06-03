@@ -81,6 +81,7 @@ class LocationsController extends Controller
         $data = request()->validate([
             'name'=>'required'
         ]);
+       // dd($data);
         $location->update($data);
       session()->flash('message',' Location Updated Successfully');
 

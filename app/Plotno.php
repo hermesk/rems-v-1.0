@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plotno extends Model
 {
-    protected $fillable = ['location_id','size_id'];
+    protected $fillable = ['location_id','size_id','plotno','status','client_id'];
 
 
 	 // public function getStatusAttribte($attribute){
