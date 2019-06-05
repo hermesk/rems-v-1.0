@@ -22,7 +22,7 @@
 
                 <div class="col-md-4 form-group">   
                     <label for="name">Name<span class="text-danger">*</span></label>
-                    <input  type="text" name="name" id="name" class="form-control" placeholder="name" value="{{old('name')}}" readonly onclick="getName()">
+                    <input  type="text" name="name" id="name" class="form-control"  value="{{old('name')}}" readonly onclick="getName()">
                     <div>{{$errors->first('name')}}</div>
 
                   
@@ -66,14 +66,22 @@
                     <div>{{$errors->first('size')}}</div>
                    
                 </div>
-                <div class="col-md-4 form-group">   
+                
+                 <div class="col-md-2 form-group" >   
                     <label for="plotno">Select Plot No</label>
-                    <select name="plotno" id="plotno" class="form-control" onchange="getPlotCost()">
+                    <select name="plotno" id="plotno" class="form-control">
                     
                     </select>
                     
                     <div>{{$errors->first('plotno')}}</div>
                    
+                </div>
+                
+                <div class="new_plot" id="new">
+                  <label for="new_plot">Select Plot No</label>
+                    <select name="new_plot" id="new_plot" class="form-control" onchange="getNewPlotCost()" >
+                      
+                    </select>
                 </div>
                 
                  </div>
@@ -157,7 +165,7 @@
             if($.trim(res)){
                 $("#plotno").empty();
                 $("#plotno").append('<option>--Select Plot No--</option>');
-
+                $("#new_plot").append('<option>--Select Plot No--</option>');
                 $.each(res,function(key,value){
                                   
               $('#plotno').append('<option value="'+key+'">'+value+'</option>');                              
@@ -174,14 +182,45 @@
     } 
     } //end of get plots
 
+ //buy new plot
+    function getAvailablePlots()
+    {        
+    var sizeID = $("#size").val(); 
+    var locationID = $('#location').val();  
+
+    if(sizeID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('get-plotno')}}",
+           data: {"size_id": sizeID,"location_id": locationID},
+           success:function(res){               
+            if($.trim(res)){
+                $("#new_plot").empty();
+                $("#new_plot").append('<option>--Select Plot No--</option>');
+
+                $.each(res,function(key,value){
+                                  
+              $('#new_plot').append('<option value="'+value+'">'+value+'</option>');                              
+                });
+  
+            }else{
+                $("#new_plot").append('<option value="">--No Plot Available for this size--</option>');
+               // $("#plotno").empty();
+            }
+           }
+        });
+    }else{
+        $("#new_plot").empty();
+    } 
+    }
+
  //get plot cost
    function getPlotCost()
    {
-    var plotnoID = $("#plotno").val(); 
     var plotno  =$( "#plotno option:selected" ).text(); 
     var sizeID = $('#size').val(); 
     var locationID = $('#location').val(); 
-    if( plotnoID){
+    if( plotno){
         $.ajax({
            type:"GET",
            url:"{{url('get-cost')}}",
@@ -198,6 +237,15 @@
             $("#cost").empty();
         }
    }
+   //get plot cost
+   function getNewPlotCost()
+   {
+    var plotno  =$( "#new_plot option:selected" ).text(); 
+    $("#plotno").empty();
+    $('#plotno').append('<option value="'+plotno+'">'+plotno+'</option>').prop('selected', true);
+     getPlotCost();
+    
+       }
 
   //search client name
     function getName(){
@@ -228,10 +276,14 @@
     //get client plots
     function getClientPlots()
     {  
-    var clientID = $("#idno").val();        
+    var clientID = $("#idno").val();   
+    var clientName = $("#name").val();      
     var sizeID = $("#size").val(); 
-    var locationID = $('#location').val();  
-    if(sizeID){
+    var locationID = $('#location').val(); 
+     if (clientName.length == 0) {
+        alert("Enter IDNO to search client name")
+           } 
+   else if(sizeID){
         $.ajax({
            type:"GET",
            url:"{{url('get-client-plots')}}",
@@ -240,13 +292,13 @@
             if($.trim(res)){
 
                 $("#plotno").empty();
-                $("#plotno").append('<option>--Select Plot No--</option>');
+                $("#plotno").append('<option>--Select--</option>');
 
                 $.each(res,function(key,value){
                                   
               $('#plotno').append('<option value="'+key+'">'+value+'</option>');                              
                 });
-             // $('#plotno').append('<option><a onClick="getPlots();" style="cursor: pointer; cursor: hand;">New Plot</a></option>');
+             $('#plotno').append('<option value="new">new</option>');
  
            
             }else{
@@ -259,9 +311,22 @@
         $("#plotno").empty();
     } 
     } //end of get plots
+ 
 
-   
+  $("#plotno").on("change", function() {
+  var val = $(this).val();
+  if (val == 'new') {
+      $(".new_plot").hide().find('input:text').val(''); // hide and empty
+
+      if (val) $("#" + val).show();
+      getAvailablePlots()
+  }
+  else{
+    getPlotCost()
+  }
+
+});
 
 </script>
-
+<select></select>
 @endsection

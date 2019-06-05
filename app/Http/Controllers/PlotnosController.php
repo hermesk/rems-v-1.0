@@ -45,7 +45,7 @@ class PlotnosController extends Controller
     {  
            $plotnos = DB::table("plotnos")
             ->whereNull('status');
-            dd($plotnos);
+           // dd($plotnos);
             
         return view('reports.plots',compact('plotnos'));
     }

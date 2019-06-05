@@ -10690,3 +10690,7 @@ form {
   }
 }
 
+.new_plot {
+  display: none;
+}
+
