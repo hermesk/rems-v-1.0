@@ -28,7 +28,7 @@ Route::get('search','TransactionsController@searchtrx');
 Route::get('export_to_excel', 'TransactionsController@export');//excel
 Route::get('export_to_csv', 'TransactionsController@csvExport');//csv
 Route::get('export-view', 'TransactionsController@exportView');//csv
-Route::get('pdf', 'TransactionsController@pdf');//pdf
+Route::get('pdf', 'TransactionsController@downloadPDF');//pdf
 
 
 //payment types
@@ -69,11 +69,6 @@ Route::get('plots/{plotno}/edit','PlotnosController@edit');
 Route::patch('plots/{plotno}','PlotnosController@update');
 Route::get('plots-report','PlotnosController@plotsReport');//plots
 
-
-//dropdown dependents
-// Route::get('get-sizes','HousetrxsController@getSizes');
-// Route::get('get-plotno','HousetrxsController@getPlotnos');
-
 //payment mode
 Route::Resource('paymentMode','PaymentModesController');
 
@@ -83,12 +78,3 @@ Route::get('/', 'HomeController@index')->name('home');
 
 // Auth::routes();['register' => false]
 
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

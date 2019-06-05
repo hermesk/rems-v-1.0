@@ -42,9 +42,17 @@
             </table>
             <div class="row">
             	<div class="col-12 d-flex justify-content-center pt-4">
-            		{{-- {{$payments->links()}} --}}
+            		{{$payments->links()}}
             	</div>
             </div>
+             <div class="col-12 d-flex justify-content-end pt-2">
+                <div class=" px-2">
+             	<a href="#" class="btn btn-success ">Export to excel</a>
+             	</div>
+             	<div class="px-2">
+             	<a href="#" class="btn btn-primary">Export to pdf</a>
+             	</div>                 
+             </div>
             </div>
         </div>
     </div>

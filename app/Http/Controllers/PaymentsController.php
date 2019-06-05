@@ -19,7 +19,7 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        $payments = Payment::all();
+        $payments = Payment::paginate(15);
         $paymentTypes =PaymentType::all();
         return view('payments.index',compact('payments','paymentTypes'));
     }

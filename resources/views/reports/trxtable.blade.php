@@ -1,15 +1,15 @@
       <table>
 				<thead>
 				<tr>
-				<th width="10%">Receiptno</th>
-			    <th width="20%">Name</th>
-			    <th width="10%">Type</th>
-			    <th width="10%">Location</th>
-			    <th width="10%">Size</th>
-			    <th width="10%">Mode</th>
-			    <th width="10%">Plotno</th>
-			    <th width="10%">Amount</th>
-			    <th width="10%">Created by</th>
+				<th >Receiptno</th>
+			    <th >Name</th>
+			    <th >Type</th>
+			    <th >Location</th>
+			    <th >Size</th>
+			    <th >Mode</th>
+			    <th >Plotno</th>
+			    <th >Amount</th>
+			    <th >Created by</th>
 
 			  </tr>
 			</thead>

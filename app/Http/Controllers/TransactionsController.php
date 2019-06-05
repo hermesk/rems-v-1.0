@@ -279,13 +279,83 @@ class TransactionsController extends Controller
         {
             return Excel::download(new ExportTransactionsView, 'trxtable.xlsx');
         }
-    public function pdf()
-        {
-             $data['title'] = 'Transactions';
-             $data['trxs'] = Transaction::paginate(15);
-             
-             $pdf = PDF::loadView('reports.transactions', $data);
-  
+
+
+  public function downloadPDF()
+
+    {
+        $trxs = Transaction::all();
+        $pdf = PDF::loadView('reports.transactions',compact('trxs'));
+
         return $pdf->download('transactions.pdf');
-        }
+
+    }
+
+        public function get_transactions_data()
+    {
+             $trxs = Transaction::all();
+             return $trxs;
+    }
+
+     public function pdf()
+            {
+             $pdf = \App::make('dompdf.wrapper');
+             $pdf->loadHTML($this->convert_transactions_data_to_html());
+             return $pdf->stream();
+            }
+
+    public function convert_transactions_data_to_html()
+    {
+     $transaction_data = $this->get_transactions_data();
+
+     $output = '
+     <h3 align="center">Transactions</h3>
+     <table width="100%" style="border-collapse: collapse; border: 0px;">
+ <tr>
+    <th style="border: 1px solid; padding:12px;" width="10%">Receiptno</th>
+    <th style="border: 1px solid; padding:12px;" width="20%">Name</th>
+    <th style="border: 1px solid; padding:12px;" width="10%">Type</th>
+    <th style="border: 1px solid; padding:12px;" width="15%">Location</th>
+    <th style="border: 1px solid; padding:12px;" width="10%">size</th>
+    <th style="border: 1px solid; padding:12px;" width="10%">Mode</th>
+    <th style="border: 1px solid; padding:12px;" width="10%">Plotno</th>
+    <th style="border: 1px solid; padding:12px;" width="10%">Amount</th>
+    <th style="border: 1px solid; padding:12px;" width="15%">Created By</th>
+</tr>
+     ';  
+     foreach($transaction_data as $trx)
+     {
+      $output .= '
+      <tr>
+       <td style="border: 1px solid; padding:12px;">'.$trx->receiptno.'</td>
+       <td style="border: 1px solid; padding:12px;">'.$trx->client_id.'</td>
+       <td style="border: 1px solid; padding:12px;">'.$trx->payment_type_id.'</td>
+       <td style="border: 1px solid; padding:12px;">'.$trx->location_id.'</td>
+       <td style="border: 1px solid; padding:12px;">'.$trx->size_id.'</td>
+       <td style="border: 1px solid; padding:12px;">'.$trx->paymentmode_id.'</td>
+       <td style="border: 1px solid; padding:12px;">'.$trx->plotno.'</td>
+       <td style="border: 1px solid; padding:12px;">'.$trx->amount.'</td>
+       <td style="border: 1px solid; padding:12px;">'.$trx->created_by.'</td>
+    
+      </tr>
+      ';
+     }
+     $output .= '</table>';
+     return $output;
+    }
+
+
+
+
+    // public function pdf()
+    //     {
+    //          $data['title'] = 'Transactions';
+    //          $data['trxs'] = Transaction::paginate(15);
+             
+    //          $pdf = PDF::loadView('reports.transactions', $data);
+  
+    //     return $pdf->download('transactions.pdf');
+
+    //     }
+
 }

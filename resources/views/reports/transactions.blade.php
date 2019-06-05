@@ -22,9 +22,9 @@
              @include('reports.trxtable')
 
             <div class="row">
-            	<div class="col-12 d-flex justify-content-center pt-4">
+            	{{-- <div class="col-12 d-flex justify-content-center pt-4">
             		{{$trxs->links()}}
-            	</div>
+            	</div> --}}
 
             </div>
             
@@ -33,7 +33,7 @@
              	<a href="{{ url('export_to_excel') }}" class="btn btn-success ">Export to excel</a>
              	</div>
              	<div class="px-2">
-             	<a href="#" class="btn btn-primary">Export to pdf</a>
+             	<a href="{{ url('pdf') }}" class="btn btn-danger">Export to pdf</a>
              	</div>                 
              </div>
             </div>

@@ -246,7 +246,7 @@
                                   
               $('#plotno').append('<option value="'+key+'">'+value+'</option>');                              
                 });
-             $('#plotno').append('<option><a onClick="getPlots();" style="cursor: pointer; cursor: hand;">*New Plot*</a></option>');
+             // $('#plotno').append('<option><a onClick="getPlots();" style="cursor: pointer; cursor: hand;">New Plot</a></option>');
  
            
             }else{
