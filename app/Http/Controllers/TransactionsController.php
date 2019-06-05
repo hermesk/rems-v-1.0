@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 use TNkemdilim\MoneyToWords\Converter;
 use Illuminate\Support\Facades\DB;
+use App\Exports\ExportTransactions;
+use App\Exports\ExportTransactionsView;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\PaymentMode;
 use App\Transaction;
 use App\PaymentType;
 use App\transactions_receipt;
+use PDF;
 use Auth;
 
 
@@ -27,8 +31,9 @@ class TransactionsController extends Controller
     public function index()
     {
         $trxs = Transaction::paginate(15);
+        //return view('reports.trxtable',compact('trxs'));
 
-        return view('reports.transactions',compact('trxs'));
+         return view('reports.transactions',compact('trxs'));
     }
 
     /**
@@ -257,5 +262,30 @@ class TransactionsController extends Controller
                         ->where("client_id",29180166)->paginate(15);
                         //->get();
             return view('reports.transactions',compact('trxs'));
+        }
+
+        /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function export() 
+    {
+      return Excel::download(new ExportTransactions, 'transactions.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+    }
+     public function csvExport() 
+    {
+      return Excel::download(new ExportTransactions, 'transactions.csv', \Maatwebsite\Excel\Excel::CSV,['Content-Type' => 'text/csv',]);
+    }
+     public function exportView()
+        {
+            return Excel::download(new ExportTransactionsView, 'trxtable.xlsx');
+        }
+    public function pdf()
+        {
+             $data['title'] = 'Transactions';
+             $data['trxs'] = Transaction::paginate(15);
+             
+             $pdf = PDF::loadView('reports.transactions', $data);
+  
+        return $pdf->download('transactions.pdf');
         }
 }

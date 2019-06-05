@@ -17,7 +17,7 @@
                 0746 517010<br/> <font>
                 </td>
                 <td>
-               {{--  <image img src="/img/logo.png" alt="Logo"></image> --}}
+                <image img src="public/images/logo.png" alt="Logo"></image>
                  <font size="0.5"><P><b>YOUR SOLUTION IN LAND & HOME CONSULTANCY</b></P>
                  </font>
                 </td>

@@ -8,7 +8,7 @@ class Transaction extends Model
 {
     protected $fillable =['receiptno','client_idno','payment_type_id','location_id','size_id','paymentmode_id','date','amount','narration','reference'];
 
-   public function client(){
+   public function owner(){
 
    	return $this->belongsTo('App\Client','client_id');
    }

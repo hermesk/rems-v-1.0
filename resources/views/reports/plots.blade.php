@@ -1,7 +1,24 @@
 @extends('layouts.app')
 @section('title','Plot Numbers')
 @section('content')
-<div class="container">
+<div class="container ">
+	<div class="col-md-4">
+		<form action="/available-plots" method="GET">
+			<div class="input-group ">
+				
+				<span class="input-group-prepend ">
+					<button type="submit" class="btn btn-primary">Available Plots</button>
+				</span>
+			</div>
+		</form>
+		<form action="/taken-plots" method="GET">
+		<div class="input-group ">
+		    <span class="input-group-prepend">
+			<button type="submit" class="btn btn-primary">Taken Plots</button>
+				</span>
+			</div>
+		</form>
+	</div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

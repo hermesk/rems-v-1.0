@@ -25,6 +25,11 @@ Route::get('transaction','TransactionsController@index')->name('transaction.inde
 Route::get('transaction/create','TransactionsController@create');
 Route::post('transaction','TransactionsController@store');
 Route::get('search','TransactionsController@searchtrx');
+Route::get('export_to_excel', 'TransactionsController@export');//excel
+Route::get('export_to_csv', 'TransactionsController@csvExport');//csv
+Route::get('export-view', 'TransactionsController@exportView');//csv
+Route::get('pdf', 'TransactionsController@pdf');//pdf
+
 
 //payment types
 Route::Resource('paymentType','PaymentTypesController');
@@ -55,7 +60,8 @@ Route::Resource('size','SizesController');
 
 //plotno
 Route::get('plots','PlotnosController@plotsindex');//plots
-Route::get('allocation','PlotnosController@takenPlots');//plots
+Route::get('taken-plots','PlotnosController@takenPlots');//plots
+Route::get('available-plots','PlotnosController@availablePlots');//plots
 Route::get('/plots/create','PlotnosController@createplotno');
 Route::post('/plotno','PlotnosController@store');
 Route::get('plots/{plotno}','PlotnosController@show');
@@ -75,7 +81,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-// Auth::routes();
+// Auth::routes();['register' => false]
 
 // Route::get('/home', 'HomeController@index')->name('home');
 

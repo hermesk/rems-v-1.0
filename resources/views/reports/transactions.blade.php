@@ -12,51 +12,33 @@
 				</span>
 			</div>
 		</form>
+
 	</div>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
              <div class="card-header">Transactions</div>
-             <table>
-				<thead>
-				<tr>
-				<th width="10%">Receiptno</th>
-			    <th width="20%">Name</th>
-			    <th width="10%">Type</th>
-			    <th width="10%">Location</th>
-			    <th width="10%">Size</th>
-			    <th width="10%">Mode</th>
-			    <th width="10%">Plotno</th>
-			    <th width="10%">Amount</th>
-			    <th width="10%">Created by</th>
 
-			  </tr>
-			</thead>
-			<tbody>
+             @include('reports.trxtable')
 
-			  @foreach($trxs as $trx)
-			 <tr>
-			 	<td>{{$trx->receiptno}}</td>
-			 	<td>{{$trx->client_id}}</td>
-			 	<td>{{$trx->paymentType->name}}</td>
-			 	<td>{{$trx->location->name}}</td>
-			 	<td>{{$trx->size->name}}</td>
-			 	<td>{{$trx->mode->name}}</td>
-			 	<td>{{$trx->plotno}}</td>
-			 	<td>{{$trx->amount}}</td>
-			 	<td>{{$trx->created_by}}</td>
-
-			 </tr>
-			    @endforeach
-			    </tbody>
-            </table>
             <div class="row">
             	<div class="col-12 d-flex justify-content-center pt-4">
             		{{$trxs->links()}}
             	</div>
+
             </div>
+            
+             <div class="col-12 d-flex justify-content-end pt-2">
+                <div class=" px-2">
+             	<a href="{{ url('export_to_excel') }}" class="btn btn-success ">Export to excel</a>
+             	</div>
+             	<div class="px-2">
+             	<a href="#" class="btn btn-primary">Export to pdf</a>
+             	</div>                 
+             </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

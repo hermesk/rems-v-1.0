@@ -16,7 +16,7 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->index('id');
-            $table->dropPrimary("id")->index();;
+            $table->dropPrimary("id")->index();
             $table->integer('idno')->unsigned()->primary();
             $table->string('name');
             $table->string('mobile')->unique();
