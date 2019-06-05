@@ -73,7 +73,6 @@ class TransactionsController extends Controller
              'narration'=>'required',
              'reference'=>'required'
         ]);
-       //dd($validate_data);
              //convert amount to words
             $converter = new Converter("Kenya Shillings", "Cents");
             $amount = $converter->convert(request('amount'));

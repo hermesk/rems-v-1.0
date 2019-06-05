@@ -60,8 +60,8 @@ Route::Resource('size','SizesController');
 
 //plotno
 Route::get('plots','PlotnosController@plotsindex');//plots
-Route::get('taken-plots','PlotnosController@takenPlots');//plots
-Route::get('available-plots','PlotnosController@availablePlots');//plots
+Route::get('taken-plots','PlotnosController@takenPlots');//taken plots
+Route::get('available-plots','PlotnosController@availablePlots');//available plots
 Route::get('/plots/create','PlotnosController@createplotno');
 Route::post('/plotno','PlotnosController@store');
 Route::get('plots/{plotno}','PlotnosController@show');

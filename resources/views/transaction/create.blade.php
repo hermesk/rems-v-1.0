@@ -328,5 +328,4 @@
 });
 
 </script>
-<select></select>
 @endsection

@@ -35,19 +35,22 @@ class PlotnosController extends Controller
 
     public function takenPlots()
     {  
-           $plotnos = DB::table("plotnos")
+           // $plotnos = DB::table("plotnos")
+           //  ->where('status',1)
+           //  ->pluck("client_id");
+            $plotnos = Plotno::with('location','size')
             ->where('status',1)
-            ->pluck("client_id");
+            ->paginate(15);
 
-        return view('reports.plots',compact('plotnos'));
+        return view('reports.plots.taken',compact('plotnos'));
     }
     public function availablePlots()
     {  
-           $plotnos = DB::table("plotnos")
-            ->whereNull('status');
-           // dd($plotnos);
-            
-        return view('reports.plots',compact('plotnos'));
+            $plotnos = Plotno::with('location','size')
+            ->whereNull('status')
+            ->paginate(15);
+
+        return view('reports.plots.available',compact('plotnos'));
     }
 
      public function plotsindex()
