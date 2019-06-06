@@ -264,22 +264,28 @@ class TransactionsController extends Controller
             return view('reports.transactions',compact('trxs'));
         }
 
-        /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function export() 
-    {
-      return Excel::download(new ExportTransactions, 'transactions.xlsx', \Maatwebsite\Excel\Excel::XLSX);
-    }
-     public function csvExport() 
-    {
-      return Excel::download(new ExportTransactions, 'transactions.csv', \Maatwebsite\Excel\Excel::CSV,['Content-Type' => 'text/csv',]);
-    }
-     public function exportView()
+
+     public function exportToExcel()
         {
-            return Excel::download(new ExportTransactionsView, 'trxtable.xlsx');
+            return Excel::download(new ExportTransactionsView, 'transactions.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         }
 
+
+       public function export_pdf()
+  {
+    // Fetch all customers from database
+      $trxs = Transaction::get();
+    // Send data to the view using loadView function of PDF facade
+     //$pdf = PDF::loadView('reports.trxtable', $trxs);
+    // If you want to store the generated pdf to the server then you can use the store function
+    //$pdf->save(storage_path().'_filename.pdf');
+    // Finally, you can download the file using download function
+    //return $pdf->download('transactions.pdf');
+        //$data = ['title' => 'Welcome to HDTuto.com'];
+        $pdf = PDF::loadView('reports.trxtable', $trxs);
+  
+        return $pdf->download('itsolutionstuff.pdf');
+  }
 
   public function downloadPDF()
 
@@ -288,6 +294,7 @@ class TransactionsController extends Controller
         $pdf = PDF::loadView('reports.transactions',compact('trxs'));
 
         return $pdf->download('transactions.pdf');
+
 
     }
 

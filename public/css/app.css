@@ -10685,7 +10685,9 @@ form {
 }
 
 @media print {
-  #print {
+  #print,
+  #excel,
+  #pdf {
     display: none;
   }
 }

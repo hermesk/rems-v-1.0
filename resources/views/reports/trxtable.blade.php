@@ -1,6 +1,7 @@
       <table>
 				<thead>
 				<tr>
+				<th>Date</th>
 				<th >Receiptno</th>
 			    <th >Name</th>
 			    <th >Type</th>
@@ -17,6 +18,7 @@
 
 			  @foreach($trxs as $trx)
 			 <tr>
+			 	<td>{{$trx->date}}</td>
 			 	<td>{{$trx->receiptno}}</td>
 			 	<td>{{$trx->client->name}}</td>
 			 	<td>{{$trx->paymentType->name}}</td>

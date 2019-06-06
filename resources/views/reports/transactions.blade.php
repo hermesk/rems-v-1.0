@@ -35,12 +35,12 @@
                              <a href="" @click.prevent="printme" target="_blank" class="fa fa-print"><i class="fa fa-print"></i> Print</a>
                        </button>
                 </div>
-                <div class=" px-2">
-             	<a href="{{ url('export-view') }}" class="btn btn-success ">Export to excel</a>
+                <div class=" px-2" id="excel">
+             	<a href="{{ url('excel-export') }}" class="btn btn-success ">Export to excel</a>
              	</div>
-             	<div class="px-2">
-             	<a href="{{ url('pdf') }}" class="btn btn-danger">Export to pdf</a>
-             	</div>                 
+             	{{-- <div class="px-2" id="pdf">
+             	<a href="{{ url('pdf-export') }}" class="btn btn-danger">Export to pdf</a>
+             	</div>  --}}                
              </div>
             </div>
         </div>

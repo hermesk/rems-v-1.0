@@ -25,10 +25,8 @@ Route::get('transaction','TransactionsController@index')->name('transaction.inde
 Route::get('transaction/create','TransactionsController@create');
 Route::post('transaction','TransactionsController@store');
 Route::get('search','TransactionsController@searchtrx');
-Route::get('export_to_excel', 'TransactionsController@export');//excel
-Route::get('export_to_csv', 'TransactionsController@csvExport');//csv
-Route::get('export-view', 'TransactionsController@exportView');//csv
-Route::get('pdf', 'TransactionsController@downloadPDF');//pdf
+Route::get('excel-export', 'TransactionsController@exportToExcel');
+Route::get('pdf-export', 'TransactionsController@export_pdf');//pdf
 
 
 //payment types

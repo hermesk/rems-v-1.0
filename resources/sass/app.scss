@@ -32,7 +32,7 @@
     text-align: center;
 }
 @media print {
-    #print{
+    #print,#excel,#pdf{
         display: none;
     }}
 
