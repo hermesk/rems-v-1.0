@@ -15,11 +15,9 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->index('id');
-            $table->dropPrimary("id")->index();
-            $table->integer('idno')->unsigned()->primary();
+            $table->integer('idno')->unique();
             $table->string('name');
-            $table->string('mobile')->unique();
+            $table->string('mobile');
             $table->string('kra_pin')->nullable();
             $table->string('created_by')->nullable();
             $table->string('deleted_by')->nullable();

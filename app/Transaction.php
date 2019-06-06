@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    protected $fillable =['receiptno','client_idno','payment_type_id','location_id','size_id','paymentmode_id','date','amount','narration','reference'];
+    protected $fillable =['receiptno','client_id','idno','payment_type_id','location_id','size_id','paymentmode_id','date','amount','narration','reference'];
 
-   public function owner(){
+   public function client(){
 
-   	return $this->belongsTo('App\Client','client_id');
+   	return $this->belongsTo('App\Client');
    }
    public function location(){
 

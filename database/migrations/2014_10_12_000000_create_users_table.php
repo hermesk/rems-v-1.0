@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->index('id');
             $table->dropPrimary("id")->index();
-            $table->string('username')->unsigned()->primary();
+            $table->string('username')->primary();
             $table->string('password');
             $table->string('created_by')->nullable();
             $table->string('deleted_by')->nullable();

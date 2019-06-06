@@ -15,7 +15,7 @@
 			    <th width="20%">Owner</th>
 			    <th width="20%">Location</th>
 			    <th width="20%">Size</th>
-			    <th width="10%">Plotnos</th>
+			    <th width="10%">Plotno</th>
 			    <th width="10%">Status</th>
 			    <th width="20%">Cost</th>
 
@@ -25,7 +25,7 @@
 
 			  @foreach($plotnos as $plot)
 			 <tr>
-			 	<td>{{$plot->client_id}}</td>
+			 	<td>{{$plot->client->name}}</td>
 			 	<td>{{$plot->location->name}}</td>
 			 
 			 	<td>

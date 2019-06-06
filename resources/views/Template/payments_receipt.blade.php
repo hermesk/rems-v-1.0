@@ -38,7 +38,7 @@
                 <tr><th>Narration:</th><td>{{$receipt['narration']}}</td></tr>
                 <tr><th>Amount in Words:</th><td>{{$receipt['amount_in_words']}}</td></tr>               
             </table>
-            <div>You were Served by {{ Auth::user()->name }}{{date('Y-m-d H:i:s')}}</div>
+            <div>You were Served by {{ Auth::user()->username }}{{date('Y-m-d H:i:s')}}</div>
                 </div>
             </div>
         </div>

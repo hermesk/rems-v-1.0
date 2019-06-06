@@ -47,7 +47,7 @@ class PlotnosController extends Controller
     public function availablePlots()
     {  
             $plotnos = Plotno::with('location','size')
-            ->whereNull('status')
+            ->where('status',0)
             ->paginate(15);
 
         return view('reports.plots.available',compact('plotnos'));

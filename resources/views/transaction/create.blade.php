@@ -83,6 +83,10 @@
                       
                     </select>
                 </div>
+                {{-- hidden client id div --}}
+                <div style="display: none;">
+                  <input type="text" name="client_id" id="client_id">
+                </div>
                 
                  </div>
 
@@ -149,6 +153,80 @@
 
 
   <script type="text/javascript">
+
+
+  //search client name
+    function getName(){
+
+       var search_idno = $('#idno').val();
+       if (search_idno.length == 0) {
+        alert("Enter IDNO to search client")
+           }
+       else{
+        $.ajax({
+            type:"GET",
+            url: "{{url('get-client-name')}}",
+            dataType:"json",
+            data: {"idno":search_idno},
+            success: function(data) {                                
+                 if ($.trim(data)) {
+                   $.each(data,function(key,value){
+
+                      $("#name").val(value);  
+                      $("#client_id").val(key); 
+                    });                
+
+                      }
+                 else{
+                    alert("IDNO " +search_idno+ " does No exist.Register the client");
+                    window.location.href = "{{route('clients.create')}}";
+                }               
+             }
+        });
+    }
+    }
+
+
+    //get client plots
+    function getClientPlots()
+    {  
+    var clientID = $("#client_id").val(); 
+    //alert(clientID);  
+    var clientName = $("#name").val();      
+    var sizeID = $("#size").val(); 
+    var locationID = $('#location').val(); 
+
+     if (clientName.length == 0) {
+        alert("Enter IDNO to search client name")
+           } 
+   else if(sizeID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('get-client-plots')}}",
+           data: {"client_id": clientID,"size_id": sizeID,"location_id": locationID},
+           success:function(res){               
+            if($.trim(res)){
+
+                $("#plotno").empty();
+                $("#plotno").append('<option>--Select--</option>');
+
+                $.each(res,function(key,value){
+                                  
+              $('#plotno').append('<option value="'+key+'">'+value+'</option>');                              
+                });
+             $('#plotno').append('<option value="new">new</option>');
+ 
+           
+            }else{
+                getPlots();
+               
+            }
+           }
+        });
+    }else{
+        $("#plotno").empty();
+    } 
+    } //end of get client plots
 
     //get plot nos
     function getPlots()
@@ -247,70 +325,7 @@
     
        }
 
-  //search client name
-    function getName(){
 
-       var search_idno = $('#idno').val();
-       if (search_idno.length == 0) {
-        alert("Enter IDNO to search client")
-           }
-       else{
-        $.ajax({
-            type:"GET",
-            url: "{{url('get-client-name')}}",
-            dataType:"json",
-            data: {"idno":search_idno},
-            success: function(data) {                                
-                 if ($.trim(data)) {
-                    $("#name").val(data);
-                      }
-                 else{
-                    alert("IDNO " +search_idno+ " does No exist.Register the client");
-                    window.location.href = "{{route('clients.create')}}";
-                }               
-             }
-        });
-    }
-    }
-
-    //get client plots
-    function getClientPlots()
-    {  
-    var clientID = $("#idno").val();   
-    var clientName = $("#name").val();      
-    var sizeID = $("#size").val(); 
-    var locationID = $('#location').val(); 
-     if (clientName.length == 0) {
-        alert("Enter IDNO to search client name")
-           } 
-   else if(sizeID){
-        $.ajax({
-           type:"GET",
-           url:"{{url('get-client-plots')}}",
-           data: {"client_id": clientID,"size_id": sizeID,"location_id": locationID},
-           success:function(res){               
-            if($.trim(res)){
-
-                $("#plotno").empty();
-                $("#plotno").append('<option>--Select--</option>');
-
-                $.each(res,function(key,value){
-                                  
-              $('#plotno').append('<option value="'+key+'">'+value+'</option>');                              
-                });
-             $('#plotno').append('<option value="new">new</option>');
- 
-           
-            }else{
-                getPlots();
-               
-            }
-           }
-        });
-    }else{
-        $("#plotno").empty();
-    } 
-    } //end of get plots
  
 
   $("#plotno").on("change", function() {

@@ -36,15 +36,15 @@ class CreateLocationSizePlotnosTables extends Migration
             $table->string('plotno');
             $table->string('cost'); 
             $table->tinyInteger('status')->default('0');
-            $table->integer('client_id')->nullable()->unsigned();
+            $table->bigInteger('client_id')->nullable()->unsigned();
             $table->string('created_by')->nullable();
             $table->string('deleted_by')->nullable();  
-            $table->foreign('client_id')->references('idno')
-            ->on('clients');
+            $table->foreign('client_id')->references('id')
+                   ->on('clients');
             $table->foreign('location_id')->references('id')
-            ->on('locations');
+                   ->on('locations');
             $table->foreign('size_id')->references('id')
-            ->on('sizes');
+                   ->on('sizes');
             $table->softDeletes();
             $table->timestamps();
         });

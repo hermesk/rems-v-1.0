@@ -90,11 +90,11 @@ class TransactionsController extends Controller
               $payment_type_id = request('paymentType');
               $payment_type = DB::table('payment_types')->where('id', $payment_type_id)->value('name');
               //get client_id
-              $client_idno = request('idno');
+              $client_id = request('client_id');
               // $client_id = DB::table('clients')
               //              ->where('idno',$client_idno)
               //              ->value('id');
-              $username = Auth::user()->name;
+              $username = Auth::user()->username;
               //rctno
               $lastrctnoID  = DB::table('transactions')
                               ->orderBy('id', 'desc')->pluck('id')
@@ -107,7 +107,8 @@ class TransactionsController extends Controller
              $trx = new Transaction();
              
              $trx->receiptno = $rctno;
-             $trx->client_id = $client_idno;
+             $trx->client_id = $client_id;
+             $trx->idno = request('idno');
              $trx->payment_type_id = request('paymentType');
              $trx->location_id = request('location');
              $trx->size_id = request('size');
@@ -130,7 +131,7 @@ class TransactionsController extends Controller
                                 ->where('size_id', $size_id)
                                 ->where('plotno', $plotno)
                                 ->update(['status' => 1,
-                                          'client_id'=>$client_idno
+                                          'client_id'=>$client_id
                                   ]);
 
               
@@ -213,8 +214,8 @@ class TransactionsController extends Controller
     public function getClient(Request $request) 
     {
 
-            $client_name = DB::table('clients')->where('idno', $request->idno)
-                          ->pluck("name");
+    $client_name = DB::table('clients')->where('idno', $request->idno)
+                          ->pluck("name","id");
 
             return response()->json($client_name);
     }
@@ -225,7 +226,7 @@ class TransactionsController extends Controller
             $plotnos = DB::table("plotnos")
             ->where("size_id",$request->size_id)
             ->where("location_id",$request->location_id)
-            ->whereNull('status')
+            ->where('status', 0)
             ->pluck("plotno","id");
 
             return response()->json($plotnos);

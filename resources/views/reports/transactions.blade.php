@@ -4,14 +4,14 @@
 @section('content')
 <div class="container">
 	<div class="col-md-4">
-		<form action="/search" method="GET">
+	{{-- 	<form action="/search" method="GET">
 			<div class="input-group">
 				<input type="search" name="search" class="form-control">
 				<span class="input-group-prepend">
 					<button type="submit" class="btn btn-primary">Search</button>
 				</span>
 			</div>
-		</form>
+		</form> --}}
 
 	</div>
     <div class="row justify-content-center">
@@ -22,9 +22,9 @@
              @include('reports.trxtable')
 
             <div class="row">
-            	{{-- <div class="col-12 d-flex justify-content-center pt-4">
+            	<div class="col-12 d-flex justify-content-center pt-4">
             		{{$trxs->links()}}
-            	</div> --}}
+            	</div>
 
             </div>
             

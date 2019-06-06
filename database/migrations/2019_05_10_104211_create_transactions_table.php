@@ -15,7 +15,8 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('client_id')->unsigned();
+            $table->bigInteger('client_id')->unsigned();
+            $table->string('idno');
             $table->string('receiptno');
             $table->bigInteger('payment_type_id')->unsigned();
             $table->integer('location_id')->unsigned();
@@ -29,7 +30,7 @@ class CreateTransactionsTable extends Migration
             $table->string('narration');
             $table->string('created_by')->nullable();
             $table->string('deleted_by')->nullable();
-            $table->foreign('client_id')->references('idno')
+            $table->foreign('client_id')->references('id')
             ->on('clients');
             $table->foreign('size_id')->references('id')
             ->on('sizes');

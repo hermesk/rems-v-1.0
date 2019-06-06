@@ -18,7 +18,7 @@
 			  @foreach($trxs as $trx)
 			 <tr>
 			 	<td>{{$trx->receiptno}}</td>
-			 	<td>{{$trx->client_id}}</td>
+			 	<td>{{$trx->client->name}}</td>
 			 	<td>{{$trx->paymentType->name}}</td>
 			 	<td>{{$trx->location->name}}</td>
 			 	<td>{{$trx->size->name}}</td>

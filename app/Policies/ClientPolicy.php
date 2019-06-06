@@ -30,8 +30,8 @@ class ClientPolicy
      */
     public function create(User $user)
     {
-        return in_array($user->email, [
-             'admin@gmail.com'
+        return in_array($user->username, [
+             'admin'
         ]);
     }
 

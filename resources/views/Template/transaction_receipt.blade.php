@@ -47,7 +47,7 @@
                 <th>Signature ............................</th>
             </tr>
             </table>
-            <div>You were Served by {{ Auth::user()->name }}{{date('Y-m-d H:i:s')}}</div>
+            <div>You were Served by {{ Auth::user()->username }}{{date('Y-m-d H:i:s')}}</div>
                 </div>
                 
             </div>
