@@ -10,7 +10,7 @@ class ExportTransactionsView implements FromView
 {
     public function view(): View
     {
-        return view('reports.transactions', [
+        return view('reports.trxtable', [
             'trxs' => Transaction::paginate(15)
          
         ]);

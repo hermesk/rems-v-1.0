@@ -27,10 +27,16 @@
             	</div>
 
             </div>
+ 
             
              <div class="col-12 d-flex justify-content-end pt-2">
+                <div class="px-2">
+                      <button id="print">
+                             <a href="" @click.prevent="printme" target="_blank" class="fa fa-print"><i class="fa fa-print"></i> Print</a>
+                       </button>
+                </div>
                 <div class=" px-2">
-             	<a href="{{ url('export_to_excel') }}" class="btn btn-success ">Export to excel</a>
+             	<a href="{{ url('export-view') }}" class="btn btn-success ">Export to excel</a>
              	</div>
              	<div class="px-2">
              	<a href="{{ url('pdf') }}" class="btn btn-danger">Export to pdf</a>
