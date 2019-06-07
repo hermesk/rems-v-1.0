@@ -26,7 +26,6 @@ Route::get('transaction/create','TransactionsController@create');
 Route::post('transaction','TransactionsController@store');
 Route::get('search','TransactionsController@searchtrx');
 Route::get('excel-export', 'TransactionsController@exportToExcel');
-Route::get('pdf-export', 'TransactionsController@export_pdf');//pdf
 
 
 //payment types
@@ -37,6 +36,7 @@ Route::Resource('paymentType','PaymentTypesController');
 Route::get('payments','PaymentsController@index')->name('payments.index');
 Route::get('payments/create','PaymentsController@create')->name('payments.create');
 Route::post('payments','PaymentsController@store')->name('payments.store');
+Route::get('excel-export-payments', 'PaymentsController@exportToExcel');
 
 //dropdown depenents
 Route::get('get-client-name','TransactionsController@getClient');

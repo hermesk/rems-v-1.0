@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\ExportPaymentsView;
+use Maatwebsite\Excel\Facades\Excel;
 use TNkemdilim\MoneyToWords\Converter;
 use App\PaymentMode;
 use App\payments_receipt;
@@ -21,7 +23,7 @@ class PaymentsController extends Controller
     {
         $payments = Payment::paginate(15);
         $paymentTypes =PaymentType::all();
-        return view('payments.index',compact('payments','paymentTypes'));
+        return view('reports.transactions.payments',compact('payments','paymentTypes'));
     }
 
     /**
@@ -133,4 +135,8 @@ class PaymentsController extends Controller
     {
         //
     }
+     public function exportToExcel()
+        {
+            return Excel::download(new ExportPaymentsView, 'payments.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        }
 }

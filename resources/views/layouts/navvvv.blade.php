@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+  <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -10,10 +10,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                     @include('layouts.nav1')
-                     
+                       <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                          </li>
+
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{route('clients.index')}}">Clients list</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/transaction/create">Transactions</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/property">Property Details</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="/plots">Plot</a>
+                          </li>
                     </ul>
-                     
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -29,7 +43,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

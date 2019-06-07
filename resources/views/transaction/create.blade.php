@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('title','Record Transaction')
  <script src="http://www.codermen.com/js/jquery.js"></script>
 @section('content')
@@ -69,7 +69,7 @@
                 
                  <div class="col-md-2 form-group" >   
                     <label for="plotno">Select Plot No</label>
-                    <select name="plotno" id="plotno" class="form-control">
+                    <select name="plotno" id="plotno" class="form-control" onchange="additionalplot()">
                     
                     </select>
                     
@@ -78,7 +78,7 @@
                 </div>
                 
                 <div class="new_plot" id="new">
-                  <label for="new_plot">Select Plot No</label>
+                  <label for="new_plot">Allocate new Plot No</label>
                     <select name="new_plot" id="new_plot" class="form-control" onchange="getNewPlotCost()" >
                       
                     </select>
@@ -140,7 +140,6 @@
              <div class="box-footer">
                     <cancle-button text="Cancel"  type="reset" ></cancle-button>
                     <my-button type="submit" text="Add"></my-button>
-                    <button type="submit" class="btn btn-primary">Add</button>
                    </div>
                     </form>
 
@@ -326,21 +325,24 @@
        }
 
 
- 
+ function additionalplot(){
 
-  $("#plotno").on("change", function() {
-  var val = $(this).val();
+   var val = $("#plotno").val();
   if (val == 'new') {
       $(".new_plot").hide().find('input:text').val(''); // hide and empty
 
       if (val) $("#" + val).show();
-      getAvailablePlots()
+      getAvailablePlots();
   }
   else{
-    getPlotCost()
+    getPlotCost();
   }
+ }
 
-});
+//   $("#plotno").on("change", function() {
+ 
+
+// });
 
 </script>
 @endsection

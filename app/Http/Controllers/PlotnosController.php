@@ -35,15 +35,13 @@ class PlotnosController extends Controller
 
     public function takenPlots()
     {  
-           // $plotnos = DB::table("plotnos")
-           //  ->where('status',1)
-           //  ->pluck("client_id");
-            $plotnos = Plotno::with('location','size')
+      $plotnos = Plotno::with('location','size')
             ->where('status',1)
             ->paginate(15);
 
         return view('reports.plots.taken',compact('plotnos'));
     }
+    
     public function availablePlots()
     {  
             $plotnos = Plotno::with('location','size')
